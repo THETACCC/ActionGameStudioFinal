@@ -43,7 +43,7 @@ public class hand_gun : MonoBehaviour
 
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
         audioSource = GetComponent<AudioSource>();
-        originalPosition = Pivot.position;
+        originalPosition = Pivot.localPosition;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -97,7 +97,7 @@ public class hand_gun : MonoBehaviour
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, -10)), Time.deltaTime * effect_speed);
 
-            Debug.Log(newScale.x);
+    
             if (newScale.x <= 0.64f)
             {
                 starteffect = false;

@@ -11,8 +11,8 @@ public class player_controller : MonoBehaviour
     public float horizontal = 0f;
     public float acceleration = 5f;
     private float decceleration = 100f;
-    private float max_hspeed = 60f;
-    private float max_hspeed_dash =160f;
+    private float max_hspeed = 50f;
+    private float max_hspeed_dash =120f;
     public float speed = 2f;
     public float jump_power = 16f;
     private float current_speed_right = 0f;
@@ -26,13 +26,14 @@ public class player_controller : MonoBehaviour
     private float lastPressTimeLeft = 0f;
     private float lastPressTimeRight = 0f;
     private const float DOUBLE_CLICK_TIME = .2f;
+    private float DashCoolDown = 0f;
 
     private float dashingspeed = 0f;
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 100f;
     private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
+    private float dashingCooldown = 2f;
     [SerializeField] private TrailRenderer tr;
 
 
@@ -82,7 +83,7 @@ public class player_controller : MonoBehaviour
     private float wallJumpingDuration = 0.2f;
     private float wallJumpingAcceleration = 1f;
 
-    private Vector2 wallJumpingPower = new Vector2(8f, 25f);
+    private Vector2 wallJumpingPower = new Vector2(6f, 20f);
     private Vector2 jump_velocity = new Vector2(0f, 0f);
 
     [SerializeField] private Rigidbody2D rb;
@@ -99,6 +100,10 @@ public class player_controller : MonoBehaviour
     //Check if flipping
     private bool isflipping = false;
 
+
+    //reference to grappling gun
+    public GrapplingGun grapplingGun;
+    private float grappletimer = 0f;
     private void Start()
     {
 
@@ -107,13 +112,26 @@ public class player_controller : MonoBehaviour
 
     void Update()
     {
+        
+        if (IsGrounded() || IsWalled() || IsWalled_Left() || iswallsliding)
+        {
+  
+
+                grapplingGun.Grapenabled = false;
+
+
+        }
+
+        
+
         if (isWallJumping)
         {
             return;
         }
 
 
-        if(!isWallJumping)
+
+        if (!isWallJumping)
         {
             jump_velocity.x = Mathf.MoveTowards(jump_velocity.x, 0, decceleration * Time.deltaTime);
         }
@@ -181,8 +199,8 @@ public class player_controller : MonoBehaviour
 
 
         //Dashing
-
-        if (Input.GetKeyDown(KeyCode.A))
+        DashCoolDown += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.A) && DashCoolDown >= 1f)
         {
             float timeSinceLastPress = Time.time - lastPressTimeLeft;
             if (timeSinceLastPress <= DOUBLE_CLICK_TIME)
@@ -191,6 +209,7 @@ public class player_controller : MonoBehaviour
                 if(!iswallsliding)
                 {
                     DashDirection = -1f;
+                    DashCoolDown = 0f;
                     StartCoroutine(Dash());
                 }
 
@@ -206,7 +225,7 @@ public class player_controller : MonoBehaviour
             lastPressTimeLeft= Time.time;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && DashCoolDown >= 1f)
         {
             float timeSinceLastPress = Time.time - lastPressTimeRight;
             if (timeSinceLastPress <= DOUBLE_CLICK_TIME)
@@ -214,6 +233,7 @@ public class player_controller : MonoBehaviour
                 if (!iswallsliding)
                 {
                     DashDirection = 1f;
+                    DashCoolDown = 0f;
                     StartCoroutine(Dash());
                 }
             }
@@ -541,5 +561,8 @@ public class player_controller : MonoBehaviour
 
         current_speed_left = max_hspeed;
     }
+
+
+
 
 }
