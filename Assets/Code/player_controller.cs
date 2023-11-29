@@ -34,6 +34,7 @@ public class player_controller : MonoBehaviour
     private float dashingPower = 100f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 2f;
+    public float dashingCooldownRef = 1f;
     [SerializeField] private TrailRenderer tr;
 
 
@@ -112,13 +113,13 @@ public class player_controller : MonoBehaviour
 
     void Update()
     {
-        
+        dashingCooldownRef += Time.deltaTime;
         if (IsGrounded() || IsWalled() || IsWalled_Left() || iswallsliding)
         {
   
 
                 grapplingGun.Grapenabled = false;
-
+                grapplingGun.startcounting = false;
 
         }
 
@@ -542,7 +543,9 @@ public class player_controller : MonoBehaviour
         rb.gravityScale = originalGravity;
         isDashing= false;
         StartCoroutine(SmoothTransitionToMaxSpeed());
+        dashingCooldownRef = 0f;
         yield return new WaitForSeconds(dashingCooldown);
+
         canDash= true;
 
     }

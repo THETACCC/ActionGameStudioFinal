@@ -56,8 +56,14 @@ public class GrapplingGun : MonoBehaviour
     public bool isgrappling = false;
     private Vector2 storedVelocity;
     public float angle;
+
+    //Cooldowns
+    public float cooldowntimer = 3f;
+    public bool startcounting = false;
+
     private void Start()
     {
+        cooldowntimer = 3f;
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
 
@@ -65,13 +71,19 @@ public class GrapplingGun : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!startcounting)
+        {
+            cooldowntimer += Time.deltaTime;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && cooldowntimer >= 3f)
         {
             SetGrapplePoint();
             Grapenabled = true;
             storedVelocity = m_rigidbody.velocity;
         }
-        else if (Input.GetKey(KeyCode.Mouse0) && Grapenabled == true)
+        else if (Input.GetKey(KeyCode.Mouse1) && Grapenabled == true)
         {
 
             if (grappleRope.enabled)
@@ -145,8 +157,9 @@ public class GrapplingGun : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0) || Grapenabled == false)
+        else if (Input.GetKeyUp(KeyCode.Mouse1) || Grapenabled == false)
         {
+            startcounting = false;
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
             m_rigidbody.gravityScale = 9.81f;
@@ -200,6 +213,8 @@ public class GrapplingGun : MonoBehaviour
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
+                    startcounting = true;
+                    cooldowntimer = 0f;
                     Debug.Log("FOUND");
                 }
             }
