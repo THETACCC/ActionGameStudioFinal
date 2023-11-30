@@ -7,7 +7,7 @@ public class WeaponMotion : MonoBehaviour
 
     public float radius = 5f; // Radius of the circle
     public Transform centerPoint; // The center point of the circle
-
+    public Vector3 direction;
     void Update()
     {
         // Get the mouse position in world coordinates
@@ -15,7 +15,7 @@ public class WeaponMotion : MonoBehaviour
         mousePosition.z = 0; // Assuming you're working in 2D
 
         // Calculate the angle towards the mouse position
-        Vector3 direction = mousePosition - centerPoint.position;
+        direction = mousePosition - centerPoint.position;
         float angle = Mathf.Atan2(direction.y, direction.x);
 
         // Calculate the new position

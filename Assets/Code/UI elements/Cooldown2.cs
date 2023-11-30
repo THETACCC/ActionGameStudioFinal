@@ -40,6 +40,6 @@ public class Cooldown2 : MonoBehaviour
 
     void CooldownBarFiller()
     {
-        CooldownBar.fillAmount = Mathf.Lerp(CooldownBar.fillAmount, (cooldown / ready )* 0.15f, lerpSpeed);
+        CooldownBar.fillAmount = Mathf.Lerp(CooldownBar.fillAmount, (cooldown / ready )* 0.20f, lerpSpeed);
     }
 }
