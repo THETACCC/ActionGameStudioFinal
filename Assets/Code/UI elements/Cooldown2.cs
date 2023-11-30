@@ -8,7 +8,7 @@ public class Cooldown2 : MonoBehaviour
     public Text Cooldowntext;
     public Image CooldownBar;
     public GrapplingGun grapplingGun;
-    float cooldown, ready = 3;
+    float cooldown, ready = 2;
     float lerpSpeed;
 
     private void Start()
