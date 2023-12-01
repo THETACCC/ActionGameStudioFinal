@@ -13,7 +13,7 @@ public class hand_gun_bullet : MonoBehaviour
     void Update()
     {
         Vector3 newScale = transform.localScale;
-        newScale.x = Mathf.Lerp(newScale.x, 0.01f, Time.deltaTime * speed);
+        newScale.x = Mathf.Lerp(newScale.x, 0.5f, Time.deltaTime * speed);
         newScale.y = Mathf.Lerp(newScale.y, 1.5f, Time.deltaTime * speed);
         transform.localScale = newScale;
         rb.velocity = rb.velocity.normalized * (rb.velocity.magnitude + accelerationRate * Time.deltaTime);

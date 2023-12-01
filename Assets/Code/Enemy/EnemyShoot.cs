@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -52,16 +53,19 @@ public class EnemyShoot : MonoBehaviour
     public float decceleration = 10f;
     private float lerpspeed = 2f;
     private float rotatetimer = 0f;
-    private float max_hspeed = 20f;
+    private float max_hspeed = 80f;
     //vertical movement
 
     private float current_vspeed = 0f;
-    private float max_vspeed = 20f;
+    private float max_vspeed = 80f;
     private float verticaldirection = 1f;
 
     //find and shoot the player
     public float ShootingRange;
 
+
+    //Health 
+    public float Health;
 
     private enum State
     {
@@ -82,6 +86,7 @@ public class EnemyShoot : MonoBehaviour
 
     void Start()
     {
+        Health = 10000;
         Myrb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -421,6 +426,16 @@ public class EnemyShoot : MonoBehaviour
 
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "HandgunBullet")
+        {
+            //explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+            //explosion_handgun.Play();
+            Health -= 100;
+        }
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

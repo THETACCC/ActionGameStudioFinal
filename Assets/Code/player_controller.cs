@@ -11,7 +11,7 @@ public class player_controller : MonoBehaviour
     public float horizontal = 0f;
     public float acceleration = 5f;
     private float decceleration = 100f;
-    private float max_hspeed = 50f;
+    private float max_hspeed = 60f;
     private float max_hspeed_dash =120f;
     public float speed = 2f;
     public float jump_power = 16f;
@@ -25,14 +25,14 @@ public class player_controller : MonoBehaviour
     private float DashDirection = 0f;
     private float lastPressTimeLeft = 0f;
     private float lastPressTimeRight = 0f;
-    private const float DOUBLE_CLICK_TIME = .2f;
+    private const float DOUBLE_CLICK_TIME = .3f;
     private float DashCoolDown = 0f;
 
     private float dashingspeed = 0f;
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 100f;
-    private float dashingTime = 0.2f;
+    private float dashingPower = 110f;
+    private float dashingTime = 0.25f;
     private float dashingCooldown = 2f;
     public float dashingCooldownRef = 1f;
     [SerializeField] private TrailRenderer tr;
@@ -170,7 +170,7 @@ public class player_controller : MonoBehaviour
 
         if (!isDashing)
         {
-            rb.gravityScale = 9.81f;
+            rb.gravityScale = 15f;
 
             dashingspeed = Mathf.MoveTowards(dashingspeed, 0, decceleration * Time.deltaTime * 2);
 

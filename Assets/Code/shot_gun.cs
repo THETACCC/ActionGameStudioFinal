@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class shot_gun : MonoBehaviour
@@ -36,6 +37,10 @@ public class shot_gun : MonoBehaviour
     //particles
     [SerializeField] private ParticleSystem shotgunfire = default;
 
+    //References
+    public WeaponMotion motion;
+
+
     private AudioSource audioSource;
     public AudioClip shootSound;
     public GameObject handgunshell;
@@ -53,7 +58,7 @@ public class shot_gun : MonoBehaviour
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        transform.up = direction;
+        transform.up = motion.direction;
 
         if (mousePosition.x < transform.position.x)
         {

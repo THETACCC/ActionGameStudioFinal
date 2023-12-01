@@ -29,6 +29,10 @@ public class Luanch_drones : MonoBehaviour
     private float effect_speed = 20f;
     public Transform pivot;
 
+
+    //References
+    public WeaponMotion motion;
+
     void Start()
     {
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
@@ -41,7 +45,7 @@ public class Luanch_drones : MonoBehaviour
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        transform.up = direction;
+        transform.up = motion.direction;
 
         if (mousePosition.x < transform.position.x)
         {

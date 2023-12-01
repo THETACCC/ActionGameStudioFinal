@@ -18,6 +18,8 @@ TagManager:
   - particles
   - particlesbig
   - SeekerEnemy
+  - UI
+  - Boss
   layers:
   - Default
   - TransparentFX

@@ -7,11 +7,17 @@ public class EnemyBullet : MonoBehaviour
     private GameObject player;
     private Rigidbody2D rb;
 
-
+    public PlayerHealthUI playerHealthUI;
+    public GameObject PlayerUI;
 
     // Start is called before the first frame update
     void Start()
     {
+        PlayerUI = GameObject.FindGameObjectWithTag("UI");
+        if (PlayerUI != null )
+        {
+            playerHealthUI = PlayerUI.GetComponent<PlayerHealthUI>();
+        }
         rb = gameObject.GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -26,9 +32,16 @@ public class EnemyBullet : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
+        if (collision.gameObject.tag == "Player")
+        {
+            playerHealthUI.health -= 10;
+            bool isCriticalHit = true;
+            DamagePopup.Create(gameObject.transform.position, 10, isCriticalHit);
+            Destroy(gameObject);
+        }
+
     }
 }
