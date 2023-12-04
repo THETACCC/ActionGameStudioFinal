@@ -45,8 +45,13 @@ public class shot_gun : MonoBehaviour
     public AudioClip shootSound;
     public GameObject handgunshell;
     public GameObject shotgun_pivot;
+
+    //ammo
+    public float ammo;
+
     void Start()
     {
+        ammo = 5;
         audioSource = GetComponent<AudioSource>();
         originalPosition = Pivot.position;
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
@@ -68,11 +73,12 @@ public class shot_gun : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && (ammo > 0))
         {
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
-            if (Time.time > myWeapon.nextFireTime)
+            if (myWeapon.nextFireTime == 0)
             {
+                ammo -= 1;
                 shotgunfire.Play();
                 if (mousePosition.x < transform.position.x)
                 {

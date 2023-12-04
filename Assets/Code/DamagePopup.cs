@@ -137,7 +137,7 @@ public class DamagePopup : MonoBehaviour
             m_transform.localScale = newScale;
 
 
-            Debug.Log(newScale.x);
+
             if (newScale.x >= 1.4f)
             {
                 starteffect = false;

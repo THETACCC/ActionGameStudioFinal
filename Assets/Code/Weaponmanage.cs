@@ -10,6 +10,7 @@ public class Weaponmanage : MonoBehaviour
 
     void Update()
     {
+
         for (int i = 0; i < weapons.Length; i++)
         {
             float remainingCooldown = weapons[i].nextFireTime - Time.time;

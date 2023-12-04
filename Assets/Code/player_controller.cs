@@ -11,8 +11,8 @@ public class player_controller : MonoBehaviour
     public float horizontal = 0f;
     public float acceleration = 5f;
     private float decceleration = 100f;
-    private float max_hspeed = 60f;
-    private float max_hspeed_dash =120f;
+    private float max_hspeed = 70f;
+    private float max_hspeed_dash =130f;
     public float speed = 2f;
     public float jump_power = 16f;
     private float current_speed_right = 0f;
@@ -81,7 +81,7 @@ public class player_controller : MonoBehaviour
     private float wallJumpingDirection;
     private float wallJumpingTime = 0.2f;
     private float wallJumpingCounter;
-    private float wallJumpingDuration = 0.2f;
+    private float wallJumpingDuration = 0.1f;
     private float wallJumpingAcceleration = 1f;
 
     private Vector2 wallJumpingPower = new Vector2(6f, 20f);
@@ -105,6 +105,14 @@ public class player_controller : MonoBehaviour
     //reference to grappling gun
     public GrapplingGun grapplingGun;
     private float grappletimer = 0f;
+
+    //invinsible Time
+    private float invisibletime = 0f;
+    public bool isinvisible = false;
+
+
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
 
@@ -113,6 +121,25 @@ public class player_controller : MonoBehaviour
 
     void Update()
     {
+        if (isinvisible)
+        {
+            invisibletime += Time.deltaTime;
+            if (invisibletime >= 1.5f)
+            {
+                isinvisible = false;
+                invisibletime = 0f;
+                SetCollisionWithLayer(8, true);
+                StopCoroutine(BlinkSprite()); // Stop blinking when no longer invisible
+                SetSpriteAlpha(1f);
+
+            }
+            else
+            {
+                StartCoroutine(BlinkSprite());
+                SetCollisionWithLayer(8, false);
+            }
+        }
+
         dashingCooldownRef += Time.deltaTime;
         if (IsGrounded() || IsWalled() || IsWalled_Left() || iswallsliding)
         {
@@ -212,6 +239,7 @@ public class player_controller : MonoBehaviour
                     DashDirection = -1f;
                     DashCoolDown = 0f;
                     StartCoroutine(Dash());
+                    isinvisible = true;
                 }
 
             }
@@ -233,6 +261,7 @@ public class player_controller : MonoBehaviour
             {
                 if (!iswallsliding)
                 {
+                    isinvisible = true;
                     DashDirection = 1f;
                     DashCoolDown = 0f;
                     StartCoroutine(Dash());
@@ -565,7 +594,31 @@ public class player_controller : MonoBehaviour
         current_speed_left = max_hspeed;
     }
 
+    private void SetCollisionWithLayer(int layer, bool state)
+    {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, layer, !state);
+    }
 
+    private IEnumerator BlinkSprite()
+    {
+        float blinkDuration = 0.1f; // Duration of each blink
+        float minAlpha = 0.01f; // Minimum alpha value
+        float maxAlpha = 1f; // Maximum alpha value
 
+        while (isinvisible)
+        {
+            SetSpriteAlpha(minAlpha); // Make sprite more transparent
+            yield return new WaitForSeconds(blinkDuration);
+            SetSpriteAlpha(maxAlpha); // Reset to full opacity
+            yield return new WaitForSeconds(blinkDuration);
+        }
+    }
+
+    private void SetSpriteAlpha(float alpha)
+    {
+        Color color = spriteRenderer.color;
+        color.a = alpha;
+        spriteRenderer.color = color;
+    }
 
 }

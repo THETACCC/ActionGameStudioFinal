@@ -19,7 +19,7 @@ public class BossHealth : MonoBehaviour
     private void Update()
     {
         health = Boss.Health;
-        lerpSpeed = 100f;
+        lerpSpeed = 0.1f;
 
         if (health > maxhealth)
         {

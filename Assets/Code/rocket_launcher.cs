@@ -41,8 +41,13 @@ public class rocket_launcher : MonoBehaviour
     //References
     public WeaponMotion motion;
 
+
+    //ammo
+    public float ammo;
+
     void Start()
     {
+        ammo = 3;
         audioSource = GetComponent<AudioSource>();
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -62,11 +67,12 @@ public class rocket_launcher : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && (ammo > 0))
         {
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
-            if (Time.time > myWeapon.nextFireTime)
+            if (myWeapon.nextFireTime == 0)
             {
+                ammo -= 1;
                 shotgunfire.Play();
                 CameraShakeManager.instance.CameraShake(impluseSrouce);
                 myWeapon.nextFireTime = Time.time + myWeapon.fireRate;

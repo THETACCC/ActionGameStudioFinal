@@ -40,9 +40,16 @@ public class hand_gun : MonoBehaviour
     //References
     public WeaponMotion motion;
 
+
+    //ammo
+    public float ammo;
+
+    //Sound Ref
+    public bool playsound = false;
+
     void Start()
     {
-
+        ammo = 60;
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
         audioSource = GetComponent<AudioSource>();
         originalPosition = Pivot.localPosition;
@@ -65,12 +72,14 @@ public class hand_gun : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && (ammo>0))
         {
 
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
-            if (Time.time > myWeapon.nextFireTime)
+            if (myWeapon.nextFireTime == 0)
             {
+                playsound = true;
+                ammo -= 1;
                 //handgun_fire.transform.position = collision.transform.position + new Vector3(1, 0, 0);
                 handgun_fire.Play();
                 if ((mousePosition.x < transform.position.x))
@@ -87,6 +96,10 @@ public class hand_gun : MonoBehaviour
                 CameraShakeManager.instance.CameraShake(impluseSrouce);
                 StartCoroutine(RecoilEffect());
                 Shoot();
+            }
+            else
+            {
+                playsound = false;
             }
         }
 

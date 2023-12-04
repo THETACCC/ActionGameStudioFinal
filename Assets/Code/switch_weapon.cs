@@ -30,8 +30,21 @@ public class switch_weapon : MonoBehaviour
     //getmanager
     public Weaponmanage manager;
 
+    //getweaponammo
+    public hand_gun handgun;
+    public shot_gun shotgun;
+    public rocket_launcher rocketLauncher;
+    public TNT_launcher TNTLauncher;
+
+    //sound stuff
+    private bool playsound = false;
+
     void Start()
     {
+        handgun.ammo = 60;
+        shotgun.ammo = 5;
+        rocketLauncher.ammo = 3;
+        TNTLauncher.ammo = 6;
         audioSource = GetComponent<AudioSource>();
         SelectWeapon();
     }
@@ -56,10 +69,6 @@ public class switch_weapon : MonoBehaviour
         {
             selectedWeapon = 3;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            selectedWeapon = 4;
-        }
         if (previousSelectedWeapon != selectedWeapon)
         {
             SelectWeapon();
@@ -67,15 +76,56 @@ public class switch_weapon : MonoBehaviour
 
         if (selectedWeapon == 0)
         {
-            if (Input.GetButtonDown("Fire1") && manager.weapons[0].nextFireTime == 0)
+            if (handgun.playsound == true)
             {
-                audioSource.PlayOneShot(handgunSound);
+                if (playsound == false)
+                {
+                    audioSource.PlayOneShot(handgunSound);
+                    playsound = true;
+                }
+
+
+            }
+            else
+            {
+                playsound = false;
+            }
+
+
+            if (shotgun.ammo < 5)
+            {
+                shotgun.ammo += 0.5f * Time.deltaTime;
+            }
+            if (TNTLauncher.ammo < 6)
+            {
+                TNTLauncher.ammo += 0.33f * Time.deltaTime;
+            }
+            if (rocketLauncher.ammo < 3)
+            {
+                rocketLauncher.ammo += 0.25f * Time.deltaTime;
+            }
+
+            if (Input.GetButton("Fire1") && manager.weapons[0].nextFireTime == 0 && handgun.ammo >0)
+            {
                 handgunplayed = false;
             }
         }
         else if (selectedWeapon == 1)
         {
-            if (Input.GetButtonDown("Fire1") && manager.weapons[1].nextFireTime == 0)
+            if (handgun.ammo < 60)
+            {
+                handgun.ammo += 8 * Time.deltaTime;
+            }
+            if (rocketLauncher.ammo < 3)
+            {
+                rocketLauncher.ammo += 0.25f * Time.deltaTime;
+            }
+            if (TNTLauncher.ammo < 6)
+            {
+                TNTLauncher.ammo += 0.33f * Time.deltaTime;
+            }
+
+            if (Input.GetButton("Fire1") && manager.weapons[1].nextFireTime == 0 && shotgun.ammo > 0)
             {
                 audioSource.PlayOneShot(shotgunSound);
                 shotgunplayed = false;
@@ -83,7 +133,20 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 2)
         {
-            if (Input.GetButtonDown("Fire1") && manager.weapons[2].nextFireTime == 0)
+            if (handgun.ammo < 60)
+            {
+                handgun.ammo += 8 * Time.deltaTime;
+            }
+            if (shotgun.ammo < 5)
+            {
+                shotgun.ammo += Time.deltaTime;
+            }
+            if (TNTLauncher.ammo < 6)
+            {
+                TNTLauncher.ammo += 0.33f * Time.deltaTime;
+            }
+
+            if (Input.GetButton("Fire1") && manager.weapons[2].nextFireTime == 0 && rocketLauncher.ammo > 0)
             {
                 audioSource.PlayOneShot(RocketSound);
                 rocketplayed = false;
@@ -91,18 +154,23 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 3)
         {
-            if (Input.GetButtonDown("Fire1") && manager.weapons[3].nextFireTime == 0)
+            if (handgun.ammo < 60)
+            {
+                handgun.ammo += 8 * Time.deltaTime;
+            }
+            if (shotgun.ammo < 5)
+            {
+                shotgun.ammo += Time.deltaTime;
+            }
+            if (rocketLauncher.ammo < 3)
+            {
+                rocketLauncher.ammo += 0.25f * Time.deltaTime;
+            }
+
+            if (Input.GetButton("Fire1") && manager.weapons[3].nextFireTime == 0 && TNTLauncher.ammo > 0)
             {
                 audioSource.PlayOneShot(mortalSound);
                 mortalplayed = false;
-            }
-        }
-        else if (selectedWeapon == 4)
-        {
-            if (Input.GetButtonDown("Fire1") && manager.weapons[4].nextFireTime == 0)
-            {
-                audioSource.PlayOneShot(droneSound);
-                droneplayed = false;
             }
         }
 

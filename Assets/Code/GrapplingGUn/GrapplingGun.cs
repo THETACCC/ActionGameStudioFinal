@@ -159,6 +159,8 @@ public class GrapplingGun : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1) || Grapenabled == false)
         {
+            controller.doublejump = false;
+            controller.triplejump= false;
             startcounting = false;
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;

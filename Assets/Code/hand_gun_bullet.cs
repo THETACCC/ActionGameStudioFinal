@@ -9,12 +9,12 @@ public class hand_gun_bullet : MonoBehaviour
     public float accelerationRate = 0.7f;
     public Rigidbody2D rb;
     //effects
-    private float speed = 10f;
+    private float speed = 2f;
     void Update()
     {
         Vector3 newScale = transform.localScale;
         newScale.x = Mathf.Lerp(newScale.x, 0.5f, Time.deltaTime * speed);
-        newScale.y = Mathf.Lerp(newScale.y, 1.5f, Time.deltaTime * speed);
+        newScale.y = Mathf.Lerp(newScale.y, 2f, Time.deltaTime * speed);
         transform.localScale = newScale;
         rb.velocity = rb.velocity.normalized * (rb.velocity.magnitude + accelerationRate * Time.deltaTime);
         
