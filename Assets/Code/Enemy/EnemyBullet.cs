@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+
+
+
     private GameObject player;
     private Rigidbody2D rb;
     private player_controller playerControll;

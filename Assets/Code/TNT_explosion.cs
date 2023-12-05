@@ -41,14 +41,14 @@ public class TNT_explosion : MonoBehaviour
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
             Explode();
-            Destroy(gameObject);
+            StartCoroutine(SelfDestruct());
         }
         else if(collision.gameObject.tag == "explosion_alone")
         {
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
             GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            StartCoroutine(SelfDestruct());
         }
         else if(collision.gameObject.tag == "Rocket")
         {
@@ -56,14 +56,21 @@ public class TNT_explosion : MonoBehaviour
             explosionbig.Play();
 
             GameObject indicator = Instantiate(explosionRadiusIndicator_super, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "SeekerEnemy")
         {
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
             GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            StartCoroutine(SelfDestruct());
+        }
+        else if (collision.gameObject.tag == "Boss")
+        {
+            smallexplosion.transform.position = this.transform.position;
+            explosionsmall.Play();
+            GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+            StartCoroutine(SelfDestruct());
         }
     }
 
@@ -86,7 +93,11 @@ public class TNT_explosion : MonoBehaviour
         Destroy(indicator);
     }
 
-
+    private IEnumerator SelfDestruct()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
+    }
     IEnumerator FlashAndExplode()
     {
         float elapsed = 0f;

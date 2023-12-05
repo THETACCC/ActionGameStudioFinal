@@ -20,6 +20,7 @@ TagManager:
   - SeekerEnemy
   - UI
   - Boss
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

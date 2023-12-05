@@ -19,7 +19,7 @@ public class Homing_Rocket : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Dummy").transform;
+        target = GameObject.FindGameObjectWithTag("Boss").transform;
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class Homing_Rocket : MonoBehaviour
         {
             explosion.Play();
             Explode();
-            Destroy(gameObject);
+            StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "explosion_alone")
         {
@@ -47,6 +47,24 @@ public class Homing_Rocket : MonoBehaviour
  
             //GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "Boss")
+        {
+            explosion.Play();
+            Explode();
+            StartCoroutine(SelfDestruct());
+        }
+        else if (collision.gameObject.tag == "EnemyBUllet")
+        {
+            explosion.Play();
+            Explode();
+            Destroy(collision.gameObject);
+        }
+        else
+        {
+            explosion.Play();
+            Explode();
+            StartCoroutine(SelfDestruct());
         }
     }
 
@@ -61,6 +79,11 @@ public class Homing_Rocket : MonoBehaviour
         GameObject indicator = Instantiate(explosionRadiusIndicator, transform.position, Quaternion.identity);
     }
 
+    private IEnumerator SelfDestruct()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
+    }
 
 
 

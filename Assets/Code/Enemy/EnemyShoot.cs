@@ -7,6 +7,11 @@ using UnityEngine.EventSystems;
 
 public class EnemyShoot : MonoBehaviour
 {
+
+    //particles
+    [SerializeField] private ParticleSystem explosion_handgun = default;
+    [SerializeField] private ParticleSystem explosionsmall = default;
+
     public GameObject bullet;
     public GameObject spawning;
     public GameObject spawningblock;
@@ -85,7 +90,9 @@ public class EnemyShoot : MonoBehaviour
     public PlayerHealthUI playerHealthUI;
     public GameObject PlayerUI;
 
-
+    //invisible time
+    private float invisibletime = 0f;
+    private bool isinvisible = false;
     private enum State
     {
         Idle,
@@ -128,6 +135,17 @@ public class EnemyShoot : MonoBehaviour
 
     void Update()
     {
+        if(isinvisible)
+        {
+            invisibletime += Time.deltaTime;
+            if(invisibletime >= 1)
+            {
+                isinvisible = false;
+            }
+        }
+
+        
+
         float distancefromplayer = Vector2.Distance(transform.position, player.transform.position);
         float playerpositionturn = playerpos.position.x - transform.position.x;
         float playerverticaldist = transform.position.y - playerpos.position.y;
@@ -895,23 +913,70 @@ public class EnemyShoot : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
+            if (collision.gameObject.tag == "HandgunBullet")
+            {
+                bool isCriticalHit = false;
+                DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
+                explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+                explosion_handgun.Play();
+                Health -= 100;
+            }
+            else if (collision.gameObject.tag == "ShotgunBullet")
+            {
+                bool isCriticalHit = false;
+                DamagePopup.Create(collision.transform.position, 50, isCriticalHit);
+                explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+                explosion_handgun.Play();
+                Health -= 50;
+            }
+            else if (collision.gameObject.tag == "explosion" && !isinvisible)
+            {
+                bool isCriticalHit = false;
+                DamagePopup.Create(collision.transform.position, 200, isCriticalHit);
+                Health -= 200;
+                isinvisible = true;
 
-        if (collision.gameObject.tag == "HandgunBullet")
-        {
-            //explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
-            //explosion_handgun.Play();
-            Health -= 100;
-        }
-        else if (collision.gameObject.tag == "Player")
+            }
+            else if (collision.gameObject.tag == "explosion_alone" && !isinvisible)
+            {
+                bool isCriticalHit = false;
+                DamagePopup.Create(collision.transform.position, 150, isCriticalHit);
+                Health -= 150;
+                isinvisible = true;
+            }
+            else if (collision.gameObject.tag == "explosion_rocket" && !isinvisible)
+            {
+                bool isCriticalHit = false;
+                DamagePopup.Create(collision.transform.position, 150, isCriticalHit);
+
+                explosionsmall.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+                explosionsmall.Play();
+                Health -= 150;
+                isinvisible = true;
+
+            }
+            else if (collision.gameObject.tag == "explosion_super" && !isinvisible)
+            {
+                bool isCriticalHit = true;
+                DamagePopup.Create(collision.transform.position + new Vector3(4, 0, 0), 500, isCriticalHit);
+                explosionsmall.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+                explosionsmall.Play();
+                Health -= 500;
+                isinvisible = true;
+            }
+
+        if (collision.gameObject.tag == "Player")
         {
             if (!playerControll.isinvisible)
             {
                 playerHealthUI.health -= 10;
                 bool isCriticalHit = true;
-                DamagePopup.Create(gameObject.transform.position, 10, isCriticalHit);
+                DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
                 playerControll.isinvisible = true;
             }
         }
+
+
     }
     private void OnDrawGizmosSelected()
     {

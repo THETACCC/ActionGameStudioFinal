@@ -27335,6 +27335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246b4dee870692d40834e00d0eaf46a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion_handgun: {fileID: 4426174919142451783}
+  explosionsmall: {fileID: 2027151021010019003}
   bullet: {fileID: 2809370532775043611, guid: 43241e2c49350854191a06577ae302d8, type: 3}
   spawning: {fileID: 108121679851467649, guid: 813bc823b9307c941840ef1afcac3297, type: 3}
   spawningblock: {fileID: 1485219443921998844, guid: b8a70866b78c63d419c1d506e95620c8, type: 3}

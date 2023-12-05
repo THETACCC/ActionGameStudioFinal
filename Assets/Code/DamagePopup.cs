@@ -133,7 +133,7 @@ public class DamagePopup : MonoBehaviour
         {
             Vector3 newScale = m_transform.localScale;
             newScale.x = Mathf.Lerp(newScale.x, 1.5f, Time.deltaTime * speed);
-            newScale.y = Mathf.Lerp(newScale.y, 0.7f, Time.deltaTime * speed);
+            newScale.y = Mathf.Lerp(newScale.y, 1f, Time.deltaTime * speed);
             m_transform.localScale = newScale;
 
 
@@ -146,8 +146,8 @@ public class DamagePopup : MonoBehaviour
         else if (!starteffect)
         {
             Vector3 newScale = m_transform.localScale;
-            newScale.x = Mathf.Lerp(newScale.x, 1f, Time.deltaTime * speed);
-            newScale.y = Mathf.Lerp(newScale.y, 1f, Time.deltaTime * speed);
+            newScale.x = Mathf.Lerp(newScale.x, 2f, Time.deltaTime * speed);
+            newScale.y = Mathf.Lerp(newScale.y, 2f, Time.deltaTime * speed);
             m_transform.localScale = newScale;
         }
 

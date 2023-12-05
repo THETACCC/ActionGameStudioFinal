@@ -33,6 +33,10 @@ public class destory_radisu : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        if(collision.gameObject.tag == "Boss")
+        {
+            Destroy(this.gameObject);
+        }
     }
     
 }
