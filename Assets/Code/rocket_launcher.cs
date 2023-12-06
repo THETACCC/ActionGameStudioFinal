@@ -67,7 +67,7 @@ public class rocket_launcher : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-        if (Input.GetButton("Fire1") && (ammo > 0))
+        if (Input.GetButton("Fire1") && (ammo > 0.99))
         {
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
             if (myWeapon.nextFireTime == 0)

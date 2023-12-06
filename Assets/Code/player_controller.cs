@@ -113,6 +113,10 @@ public class player_controller : MonoBehaviour
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    //dialogues
+    public bool istalking = false;
+
+
     private void Start()
     {
 
@@ -121,6 +125,14 @@ public class player_controller : MonoBehaviour
 
     void Update()
     {
+
+        if (istalking)
+        {
+            animator.SetFloat("Speed", (current_speed_left + current_speed_right) / 2);
+            return;
+
+        }
+
         if (isinvisible)
         {
             invisibletime += Time.deltaTime;
@@ -141,14 +153,14 @@ public class player_controller : MonoBehaviour
         }
 
         dashingCooldownRef += Time.deltaTime;
-        if (IsGrounded() || IsWalled() || IsWalled_Left() || iswallsliding)
-        {
+        //if (IsGrounded() || IsWalled() || IsWalled_Left() || iswallsliding)
+        //{
   
 
-                grapplingGun.Grapenabled = false;
-                grapplingGun.startcounting = false;
+        //        grapplingGun.Grapenabled = false;
+        //        grapplingGun.startcounting = false;
 
-        }
+       // }
 
         
 
@@ -299,7 +311,12 @@ public class player_controller : MonoBehaviour
 
         }
 
+  
+
+
         animator.SetFloat("Speed", (current_speed_left + current_speed_right) / 2);
+
+
 
         if (!isWallJumping)
         {
@@ -327,6 +344,19 @@ public class player_controller : MonoBehaviour
         }
     }
 
+
+    public void talking()
+    {
+        current_speed_left = 0;
+        current_speed_right = 0;
+        istalking = true;
+    }
+
+
+    public void Stoptalking()
+    {
+        istalking = false;
+    }
 
     private void Jump()
     {

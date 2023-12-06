@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7dfa7e66cbec14ab1650a76d513f50, type: 3}
+  m_Name: Tutorialfinish
+  m_EditorClassIdentifier: 
+  m_name: 
+  editorNodes:
+  - name: Start
+    uid: 901453
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 234
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 4
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: e8cb0a00
+    linkedFromNodesID: 
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: End
+    uid: 959434
+    rect:
+      serializedVersion: 2
+      x: 570
+      y: 240
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 7
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 
+    linkedFromNodesID: 6dc40000
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 2
+    uid: 707560
+    rect:
+      serializedVersion: 2
+      x: 201
+      y: 269
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Thats it soldier. Now meet me upstairs using the pillar evelator
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 6dc40000
+    linkedFromNodesID: 4dc10d00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 3
+    uid: 50285
+    rect:
+      serializedVersion: 2
+      x: 362
+      y: 263
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: See you in a moment
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: caa30e00
+    linkedFromNodesID: e8cb0a00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  int_properties: []
+  event_properties: []

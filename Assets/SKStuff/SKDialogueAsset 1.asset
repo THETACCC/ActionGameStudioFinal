@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7dfa7e66cbec14ab1650a76d513f50, type: 3}
+  m_Name: SKDialogueAsset 1
+  m_EditorClassIdentifier: 
+  m_name: 
+  editorNodes:
+  - name: Start
+    uid: 137108
+    rect:
+      serializedVersion: 2
+      x: 86
+      y: 588
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 4
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: c3870100
+    linkedFromNodesID: 
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: End
+    uid: 858954
+    rect:
+      serializedVersion: 2
+      x: 806
+      y: 683
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 7
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 
+    linkedFromNodesID: cb4a0c00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 2
+    uid: 100291
+    rect:
+      serializedVersion: 2
+      x: 228
+      y: 648
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Now you will face some real enemies that can damage you.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 7d5f0200
+    linkedFromNodesID: 94170200
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 3
+    uid: 155517
+    rect:
+      serializedVersion: 2
+      x: 351
+      y: 665
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Those eye looking monster infront of you is Boomers that will explode
+        in close proximity with you.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 0ace0700
+    linkedFromNodesID: c3870100
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 4
+    uid: 511498
+    rect:
+      serializedVersion: 2
+      x: 464
+      y: 677
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Before they explode, their eyes will blink. Use this as an indicator.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: cb4a0c00
+    linkedFromNodesID: 7d5f0200
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 5
+    uid: 805579
+    rect:
+      serializedVersion: 2
+      x: 630
+      y: 686
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: You can either use your shotgun or machinegun to kill it.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 4a1b0d00
+    linkedFromNodesID: 0ace0700
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  int_properties: []
+  event_properties: []

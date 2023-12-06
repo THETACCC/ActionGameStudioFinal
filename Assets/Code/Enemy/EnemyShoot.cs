@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 public class EnemyShoot : MonoBehaviour
 {
+    //Game Start
+    public bool isactivate = false;
+
 
     //particles
     [SerializeField] private ParticleSystem explosion_handgun = default;
@@ -105,6 +108,7 @@ public class EnemyShoot : MonoBehaviour
         LaserAttack,
         SpamAttackSpawnBlock,
         SpamAttackSpawnSlime,
+        SpamAttackSpawnBoomer,
         VerticalAttack,
         UltimateAttack,
         HeavyAttackV2,
@@ -135,6 +139,12 @@ public class EnemyShoot : MonoBehaviour
 
     void Update()
     {
+        if(!isactivate)
+        {
+            return;
+        }
+
+
         if(isinvisible)
         {
             invisibletime += Time.deltaTime;
@@ -296,7 +306,7 @@ public class EnemyShoot : MonoBehaviour
                         {
                             timer = 0;
 
-                            int attack = UnityEngine.Random.Range(0, 25);
+                            int attack = UnityEngine.Random.Range(0, 29);
 
                             if (attack == 0 || attack == 1 || attack == 2)
                             {
@@ -325,6 +335,10 @@ public class EnemyShoot : MonoBehaviour
                             else if (attack == 18 || attack == 19 || attack == 20 || attack == 21 || attack == 22 || attack == 23 || attack == 24)
                             {
                                 state = State.RageDashV2;
+                            }
+                            else if (attack == 25 || attack == 26 || attack == 27 || attack == 28)
+                            {
+                                state = State.SpamAttackSpawnBoomer;
                             }
 
                         }
@@ -385,7 +399,10 @@ public class EnemyShoot : MonoBehaviour
                 SpamAttackSpawnSlime();
 
                 break;
+            case State.SpamAttackSpawnBoomer:
+                SpamAttackSpawnBoomer();
 
+                break;
             case State.HeavyAttackV2:
                 HeavyAttackV2();
 
@@ -602,6 +619,8 @@ public class EnemyShoot : MonoBehaviour
                 GameObject bullet_obj = Instantiate(spawningblock, spawnpos.position, Quaternion.identity);
                 Vector3 direction = player.transform.position - transform.position;
                 Rigidbody2D rb = bullet_obj.GetComponent<Rigidbody2D>();
+                DashingEnemy dashing = bullet_obj.GetComponent<DashingEnemy>();
+                dashing.triggered = true;
                 rb.velocity = new Vector2(direction.x + UnityEngine.Random.Range(-5, 5), direction.y + UnityEngine.Random.Range(-5, 5)).normalized * force;
                 bulletspamcount += 1;
             }
@@ -655,6 +674,32 @@ public class EnemyShoot : MonoBehaviour
             state = State.Idle;
         }
     }
+
+    void SpamAttackSpawnBoomer()
+    {
+        Myrb.velocity = new Vector2(0, 0);
+        if (bulletspamcount < 5)
+        {
+
+            spamtimer += Time.deltaTime;
+            if (spamtimer > 0.15)
+            {
+
+                spamtimer = 0;
+                GameObject bullet_obj = Instantiate(spawning, spawnpos.position, Quaternion.identity);
+                Vector3 direction = player.transform.position - transform.position;
+                Rigidbody2D rb = bullet_obj.GetComponent<Rigidbody2D>();
+                rb.velocity = new Vector2(direction.x + UnityEngine.Random.Range(-5, 5), direction.y + UnityEngine.Random.Range(-5, 5)).normalized * force;
+                bulletspamcount += 1;
+            }
+        }
+        else if (bulletspamcount >= 2)
+        {
+            bulletspamcount = 0;
+            state = State.SpotPlayer;
+        }
+    }
+
 
     void VerticalAttack()
     {
@@ -916,10 +961,10 @@ public class EnemyShoot : MonoBehaviour
             if (collision.gameObject.tag == "HandgunBullet")
             {
                 bool isCriticalHit = false;
-                DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
+                DamagePopup.Create(collision.transform.position, 25, isCriticalHit);
                 explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
                 explosion_handgun.Play();
-                Health -= 100;
+                Health -= 25;
             }
             else if (collision.gameObject.tag == "ShotgunBullet")
             {
@@ -932,16 +977,16 @@ public class EnemyShoot : MonoBehaviour
             else if (collision.gameObject.tag == "explosion" && !isinvisible)
             {
                 bool isCriticalHit = false;
-                DamagePopup.Create(collision.transform.position, 200, isCriticalHit);
-                Health -= 200;
+                DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
+                Health -= 100;
                 isinvisible = true;
 
             }
             else if (collision.gameObject.tag == "explosion_alone" && !isinvisible)
             {
                 bool isCriticalHit = false;
-                DamagePopup.Create(collision.transform.position, 150, isCriticalHit);
-                Health -= 150;
+                DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
+                Health -= 100;
                 isinvisible = true;
             }
             else if (collision.gameObject.tag == "explosion_rocket" && !isinvisible)
@@ -978,6 +1023,13 @@ public class EnemyShoot : MonoBehaviour
 
 
     }
+
+
+    public void Acitavte()
+    {
+        isactivate= true;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

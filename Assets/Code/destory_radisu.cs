@@ -9,11 +9,21 @@ public class destory_radisu : MonoBehaviour
     public float timeLeft = 1f;
 
     private GameObject dummy;
-
+    //Player Ref
+    private player_controller playerControll;
+    public GameObject player;
+    public PlayerHealthUI playerHealthUI;
+    public GameObject PlayerUI;
 
     private void Start()
     {
-        dummy = GameObject.FindGameObjectWithTag("Dummy");
+        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerUI = GameObject.FindGameObjectWithTag("UI");
+        if (PlayerUI != null)
+        {
+            playerHealthUI = PlayerUI.GetComponent<PlayerHealthUI>();
+        }
+        playerControll = player.GetComponent<player_controller>();
     }
     void Update()
     {
@@ -29,11 +39,17 @@ public class destory_radisu : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "SeekerEnemy")
+        if (collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            if (!playerControll.isinvisible)
+            {
+                playerHealthUI.health -= 10;
+                bool isCriticalHit = true;
+                DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
+                playerControll.isinvisible = true;
+            }
         }
-        if(collision.gameObject.tag == "Boss")
+        if (collision.gameObject.tag == "Boss")
         {
             Destroy(this.gameObject);
         }

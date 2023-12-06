@@ -74,6 +74,12 @@ namespace SKCell
             Play();
         }
 
+        public void SentenceNextStep()
+        {
+            OnContentButtonPressed();
+        }
+
+
         /// <summary>
         /// Add listener to an event node according to its name.
         /// </summary>

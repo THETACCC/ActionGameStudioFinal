@@ -62,7 +62,7 @@ public class TNT_launcher : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-        if (Input.GetButton("Fire1") && (ammo > 0))
+        if (Input.GetButton("Fire1") && (ammo > 0.99))
         {
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
             if (myWeapon.nextFireTime == 0)
@@ -84,7 +84,6 @@ public class TNT_launcher : MonoBehaviour
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, -10)), Time.deltaTime * effect_speed);
 
-            Debug.Log(newScale.x);
             if (newScale.y <= 0.64f)
             {
                 starteffect = false;

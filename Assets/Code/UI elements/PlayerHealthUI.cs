@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
@@ -27,6 +28,12 @@ public class PlayerHealthUI : MonoBehaviour
         }
         CooldownBarFiller();
         //ColorChanger();
+        if(health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+
     }
 
     bool DisplayHealthPoint ( float _health, int pointNumber)

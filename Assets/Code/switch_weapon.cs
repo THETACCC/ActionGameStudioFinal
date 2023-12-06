@@ -69,10 +69,44 @@ public class switch_weapon : MonoBehaviour
         {
             selectedWeapon = 3;
         }
+
+
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            // Scroll up
+            if (selectedWeapon >= transform.childCount - 1)
+                selectedWeapon = 0;
+            else
+                selectedWeapon++;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            // Scroll down
+            if (selectedWeapon <= 0)
+                selectedWeapon = transform.childCount - 1;
+            else
+                selectedWeapon--;
+        }
+        
+
+
+
+
+
+
+
+
         if (previousSelectedWeapon != selectedWeapon)
         {
             SelectWeapon();
         }
+
+        
+
+
+
+
 
         if (selectedWeapon == 0)
         {
@@ -90,19 +124,28 @@ public class switch_weapon : MonoBehaviour
             {
                 playsound = false;
             }
+            if(handgun.ammo <= 0.99)
+            {
+                if (selectedWeapon >= transform.childCount - 1)
+                    selectedWeapon = 0;
+                else
+                    selectedWeapon++;
+
+                SelectWeapon();
+            }
 
 
             if (shotgun.ammo < 5)
             {
-                shotgun.ammo += 0.5f * Time.deltaTime;
+                shotgun.ammo += 2f * Time.deltaTime;
             }
             if (TNTLauncher.ammo < 6)
             {
-                TNTLauncher.ammo += 0.33f * Time.deltaTime;
+                TNTLauncher.ammo += 0.66f * Time.deltaTime;
             }
             if (rocketLauncher.ammo < 3)
             {
-                rocketLauncher.ammo += 0.25f * Time.deltaTime;
+                rocketLauncher.ammo += 0.5f * Time.deltaTime;
             }
 
             if (Input.GetButton("Fire1") && manager.weapons[0].nextFireTime == 0 && handgun.ammo >0)
@@ -112,17 +155,29 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 1)
         {
+
+            if (shotgun.ammo <= 0.99)
+            {
+                if (selectedWeapon >= transform.childCount - 1)
+                    selectedWeapon = 0;
+                else
+                    selectedWeapon++;
+
+                SelectWeapon();
+            }
+
+
             if (handgun.ammo < 60)
             {
-                handgun.ammo += 8 * Time.deltaTime;
+                handgun.ammo += 12f * Time.deltaTime;
             }
             if (rocketLauncher.ammo < 3)
             {
-                rocketLauncher.ammo += 0.25f * Time.deltaTime;
+                rocketLauncher.ammo += 0.5f * Time.deltaTime;
             }
             if (TNTLauncher.ammo < 6)
             {
-                TNTLauncher.ammo += 0.33f * Time.deltaTime;
+                TNTLauncher.ammo += 0.66f * Time.deltaTime;
             }
 
             if (Input.GetButton("Fire1") && manager.weapons[1].nextFireTime == 0 && shotgun.ammo > 0)
@@ -133,17 +188,28 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 2)
         {
+
+            if (rocketLauncher.ammo <= 0.99)
+            {
+                if (selectedWeapon >= transform.childCount - 1)
+                    selectedWeapon = 0;
+                else
+                    selectedWeapon++;
+
+                SelectWeapon();
+            }
+
             if (handgun.ammo < 60)
             {
-                handgun.ammo += 8 * Time.deltaTime;
+                handgun.ammo += 12f * Time.deltaTime;
             }
             if (shotgun.ammo < 5)
             {
-                shotgun.ammo += Time.deltaTime;
+                shotgun.ammo += 2f * Time.deltaTime;
             }
             if (TNTLauncher.ammo < 6)
             {
-                TNTLauncher.ammo += 0.33f * Time.deltaTime;
+                TNTLauncher.ammo += 0.66f * Time.deltaTime;
             }
 
             if (Input.GetButton("Fire1") && manager.weapons[2].nextFireTime == 0 && rocketLauncher.ammo > 0)
@@ -154,17 +220,28 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 3)
         {
+
+            if (TNTLauncher.ammo <= 0.99)
+            {
+                if (selectedWeapon >= transform.childCount - 1)
+                    selectedWeapon = 0;
+                else
+                    selectedWeapon++;
+
+                SelectWeapon();
+            }
+
             if (handgun.ammo < 60)
             {
-                handgun.ammo += 8 * Time.deltaTime;
+                handgun.ammo += 12f * Time.deltaTime;
             }
             if (shotgun.ammo < 5)
             {
-                shotgun.ammo += Time.deltaTime;
+                shotgun.ammo += 2f * Time.deltaTime;
             }
             if (rocketLauncher.ammo < 3)
             {
-                rocketLauncher.ammo += 0.25f * Time.deltaTime;
+                rocketLauncher.ammo += 0.5f * Time.deltaTime;
             }
 
             if (Input.GetButton("Fire1") && manager.weapons[3].nextFireTime == 0 && TNTLauncher.ammo > 0)

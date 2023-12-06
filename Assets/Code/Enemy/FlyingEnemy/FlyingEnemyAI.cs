@@ -37,6 +37,10 @@ public class FlyingEnemyAI : MonoBehaviour
     //particles
     [SerializeField] private ParticleSystem explosion = default;
 
+    //radius
+    public GameObject explosionradius;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -143,6 +147,7 @@ public class FlyingEnemyAI : MonoBehaviour
         time += Time.deltaTime;
         if (time >= 3)
         {
+            explosionradius.SetActive(true);
             explosion.Play();
             spriteRenderer.sprite = null;
             Invoke("killself", 1f);
@@ -162,7 +167,7 @@ public class FlyingEnemyAI : MonoBehaviour
             }
             else
             {
-                spriteRenderer.color = Color.red;
+                spriteRenderer.color = Color.black;
             }
             isRed = !isRed;
 
@@ -172,6 +177,26 @@ public class FlyingEnemyAI : MonoBehaviour
     void killself()
     {
         Destroy(gameObject);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((collision.gameObject.tag == "ShotgunBullet"))
+        {
+            explosionradius.SetActive(true);
+            explosion.Play();
+            spriteRenderer.sprite = null;
+            Invoke("killself", 1f);
+        }
+        else if ((collision.gameObject.tag == "HandgunBullet"))
+        {
+            explosionradius.SetActive(true);
+            explosion.Play();
+            spriteRenderer.sprite = null;
+            Invoke("killself", 1f);
+        }
+
+
     }
 
 }

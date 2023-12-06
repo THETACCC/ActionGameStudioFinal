@@ -1,0 +1,287 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7dfa7e66cbec14ab1650a76d513f50, type: 3}
+  m_Name: ShootTutorial
+  m_EditorClassIdentifier: 
+  m_name: 
+  editorNodes:
+  - name: Start
+    uid: 973592
+    rect:
+      serializedVersion: 2
+      x: 57
+      y: 835
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 4
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 67250100
+    linkedFromNodesID: 
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: End
+    uid: 209310
+    rect:
+      serializedVersion: 2
+      x: 1133
+      y: 950
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 7
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 
+    linkedFromNodesID: bb020e00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 2
+    uid: 75111
+    rect:
+      serializedVersion: 2
+      x: 185
+      y: 901
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Now it's time to get some actual fighting! The thing orbiting you
+        is the weapon ring.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 33d90900
+    linkedFromNodesID: 18db0e00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 3
+    uid: 645427
+    rect:
+      serializedVersion: 2
+      x: 310
+      y: 909
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: This ring allows you to fight while moving in max mobility.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 68470900
+    linkedFromNodesID: 67250100
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 4
+    uid: 608104
+    rect:
+      serializedVersion: 2
+      x: 439
+      y: 974
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: In terms of the weapons. You can either use your MOUSE SCROLL or NUMBER
+        ON KEYBOARD to swtich between them.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 9a490300
+    linkedFromNodesID: 33d90900
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 5
+    uid: 215450
+    rect:
+      serializedVersion: 2
+      x: 569
+      y: 976
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Each weapon has a unique firing method, and they could create powerful
+        combos if you use them correctly.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 35c80100
+    linkedFromNodesID: 68470900
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 6
+    uid: 116789
+    rect:
+      serializedVersion: 2
+      x: 706
+      y: 971
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Also. the four colors in the weapon ring indicate the ammo you have
+        for each weapon. They will recharge themselves when you are not holding them.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: bb020e00
+    linkedFromNodesID: 9a490300
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 7
+    uid: 918203
+    rect:
+      serializedVersion: 2
+      x: 868
+      y: 1019
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: You can use the target dummy in front of you to do some weapon testing.
+        Once you finish, just hop over it to the next area.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 9e310300
+    linkedFromNodesID: 35c80100
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  int_properties: []
+  event_properties: []

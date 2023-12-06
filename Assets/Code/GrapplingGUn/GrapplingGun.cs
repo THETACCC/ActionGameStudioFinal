@@ -61,6 +61,10 @@ public class GrapplingGun : MonoBehaviour
     public float cooldowntimer = 2f;
     public bool startcounting = false;
 
+    //ref
+    public Mycursor cursor;
+
+
     private void Start()
     {
         cooldowntimer = 3f;

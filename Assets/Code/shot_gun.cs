@@ -73,7 +73,7 @@ public class shot_gun : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-        if (Input.GetButton("Fire1") && (ammo > 0))
+        if (Input.GetButton("Fire1") && (ammo > 0.99))
         {
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
             if (myWeapon.nextFireTime == 0)
@@ -101,7 +101,7 @@ public class shot_gun : MonoBehaviour
         {
             Vector3 newScale = pivot.localScale;
             newScale.x = Mathf.Lerp(newScale.x, 1.25f, Time.deltaTime * effect_speed);
-            newScale.y = Mathf.Lerp(newScale.y, 0.6f, Time.deltaTime * effect_speed);
+            newScale.y = Mathf.Lerp(newScale.y, 0.8f, Time.deltaTime * effect_speed);
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, -10)), Time.deltaTime * effect_speed);
 
@@ -114,8 +114,8 @@ public class shot_gun : MonoBehaviour
         else if (!starteffect)
         {
             Vector3 newScale = pivot.localScale;
-            newScale.x = Mathf.Lerp(newScale.x, 1f, Time.deltaTime * effect_speed);
-            newScale.y = Mathf.Lerp(newScale.y, 1f, Time.deltaTime * effect_speed);
+            newScale.x = Mathf.Lerp(newScale.x, 1.5f, Time.deltaTime * effect_speed);
+            newScale.y = Mathf.Lerp(newScale.y, 1.5f, Time.deltaTime * effect_speed);
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, 0)), Time.deltaTime * effect_speed);
         }

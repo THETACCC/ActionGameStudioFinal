@@ -51,8 +51,8 @@ MonoBehaviour:
     uid: 164022
     rect:
       serializedVersion: 2
-      x: 1080.1111
-      y: 813.8889
+      x: 1064.1111
+      y: 850.8889
       width: 100
       height: 130
     oRect:
@@ -68,8 +68,7 @@ MonoBehaviour:
       speaker_localID: 0
       content: I was fishing with my <wave>mom</> yesterday evening. How about you?
       speaker: Lily
-      avatar: {fileID: 2842572262472615531, guid: cee03e61815593e4c8b4384b667d71dc,
-        type: 3}
+      avatar: {fileID: 2842572262472615531, guid: cee03e61815593e4c8b4384b667d71dc, type: 3}
       audio: {fileID: 0}
     linkedNodesID: 3c2f0700f90e0200339605005dcc0200
     linkedFromNodesID: c4a2090053080800
@@ -283,8 +282,8 @@ MonoBehaviour:
     uid: 366131
     rect:
       serializedVersion: 2
-      x: 1242.1111
-      y: 982.8889
+      x: 1303.1111
+      y: 1030.8889
       width: 100
       height: 80
     oRect:

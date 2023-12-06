@@ -58,7 +58,7 @@ public class hand_gun : MonoBehaviour
 
     void Update()
     {
-
+        Debug.Log(ammo);
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = motion.direction;
@@ -72,7 +72,7 @@ public class hand_gun : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        if (Input.GetButton("Fire1") && (ammo>0))
+        if (Input.GetButton("Fire1") && (ammo>0.99))
         {
 
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);

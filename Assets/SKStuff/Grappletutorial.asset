@@ -1,0 +1,252 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7dfa7e66cbec14ab1650a76d513f50, type: 3}
+  m_Name: Grappletutorial
+  m_EditorClassIdentifier: 
+  m_name: 
+  editorNodes:
+  - name: Start
+    uid: 309725
+    rect:
+      serializedVersion: 2
+      x: 200
+      y: 829
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 4
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 985c0600
+    linkedFromNodesID: 
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: End
+    uid: 405464
+    rect:
+      serializedVersion: 2
+      x: 1102
+      y: 1003
+      width: 100
+      height: 80
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 7
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: <content>
+      speaker: <speaker>
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 
+    linkedFromNodesID: 76910700
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 2
+    uid: 416920
+    rect:
+      serializedVersion: 2
+      x: 352
+      y: 906
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Now another bar just appear. This is your grappling hook indicator.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 9c8a0200
+    linkedFromNodesID: ddb90400
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 3
+    uid: 166556
+    rect:
+      serializedVersion: 2
+      x: 481
+      y: 972
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: You can use your RMB to use the grappling hook. This tool is very
+        handy in dangerous situations.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: f1230b00
+    linkedFromNodesID: 985c0600
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 4
+    uid: 787730
+    rect:
+      serializedVersion: 2
+      x: 776
+      y: 1015
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Those red blocks in front of you will not kill you. But they wil teleport
+        you back.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 76910700
+    linkedFromNodesID: f1230b00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 5
+    uid: 495990
+    rect:
+      serializedVersion: 2
+      x: 913
+      y: 1025
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Show me how can you get over this place using the grappling hook.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: d82f0600
+    linkedFromNodesID: 12050c00
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  - name: Sentence 6
+    uid: 730097
+    rect:
+      serializedVersion: 2
+      x: 645
+      y: 1022
+      width: 100
+      height: 130
+    oRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    type: 0
+    textType: 0
+    info:
+      content_localID: 0
+      speaker_localID: 0
+      content: Also, your mouse will indicate whether you can grapple or not. When
+        it's a square shape, you can grapple.
+      speaker: Command
+      avatar: {fileID: 0}
+      audio: {fileID: 0}
+    linkedNodesID: 12050c00
+    linkedFromNodesID: 9c8a0200
+    event_name: <event name>
+    event_arg0: 0
+    event_arg1: 0
+    int_property_name: <variable>
+    int_property_value: 0
+    if_property_name: <variable>
+    if_property_value: 0
+    if_comparator: 0
+  int_properties: []
+  event_properties: []

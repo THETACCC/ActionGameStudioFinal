@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DashingEnemy : MonoBehaviour
 {
+
+    //Player Ref
+    private player_controller playerControll;
+
+    public PlayerHealthUI playerHealthUI;
+    public GameObject PlayerUI;
     private GameObject player;
 
     public float detectdistance;
@@ -36,6 +42,10 @@ public class DashingEnemy : MonoBehaviour
     //other reference
     public bool isshield = true;
 
+    //mannual trigger
+    public bool triggered = false;  
+
+
     private enum State
     {
         Idle,
@@ -50,6 +60,13 @@ public class DashingEnemy : MonoBehaviour
         dashspeedHype = dashspeed * 3;
         Myrb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        PlayerUI = GameObject.FindGameObjectWithTag("UI");
+        if (PlayerUI != null)
+        {
+            playerHealthUI = PlayerUI.GetComponent<PlayerHealthUI>();
+        }
+        playerControll = player.GetComponent<player_controller>();
+
         playerpos = player.transform;
     }
 
@@ -69,15 +86,17 @@ public class DashingEnemy : MonoBehaviour
                 }
 
                 Myrb.velocity = new Vector2(current_speed * moveDirection, Myrb.velocity.y);
-                if (distance < detectdistance)
+                if (triggered)
                 {
-
                     state = State.SpotPlayer;
                 }
+
+                
                 break;
 
             case State.SpotPlayer:
 
+                Debug.Log("moving");
                 float distancefromplayer = Vector2.Distance(transform.position, player.transform.position);
                 float playerpositionturn = playerpos.position.x - transform.position.x;
                 float playerverticaldist = transform.position.y - playerpos.position.y;
@@ -146,7 +165,11 @@ public class DashingEnemy : MonoBehaviour
 
 
     }
-
+    public void Trigger()
+    {
+        triggered = true;
+        Debug.Log("ok");
+    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -154,10 +177,23 @@ public class DashingEnemy : MonoBehaviour
         Vector2 force = direction * bouncespeed * Time.deltaTime;
         Myrb.AddForce(force, ForceMode2D.Impulse);
 
-        if ((collision.gameObject.tag == "Drone") && !isshield)
+        if ((collision.gameObject.tag == "ShotgunBullet") && !isshield)
         {
             Destroy(gameObject);
         }
+
+
+        if (collision.gameObject.tag == "Player")
+        {
+            if (!playerControll.isinvisible)
+            {
+                playerHealthUI.health -= 10;
+                bool isCriticalHit = true;
+                DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
+                playerControll.isinvisible = true;
+            }
+        }
+
 
     }
 
