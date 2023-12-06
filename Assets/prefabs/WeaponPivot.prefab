@@ -5346,7 +5346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &336494638224060940
 Transform:
   m_ObjectHideFlags: 0
@@ -5355,7 +5355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3012734763648187340}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.8, y: 56.4, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
@@ -21088,11 +21088,11 @@ MonoBehaviour:
   RocketSound: {fileID: 8300000, guid: a1312fa22bf366d4b9c235ae8dd1551e, type: 3}
   mortalSound: {fileID: 8300000, guid: 862ac9ef859c15041bf644993610f435, type: 3}
   droneSound: {fileID: 8300000, guid: d628a23ce83b26a489137be228675774, type: 3}
-  handgunready: {fileID: 8300000, guid: 87745b11f392ccc45a918e0b5ace434d, type: 3}
-  shotgunready: {fileID: 8300000, guid: ecbb402b0682a904a82c136d1ed2f3b4, type: 3}
-  rocketready: {fileID: 8300000, guid: c97a93563e7f8cb4f8410f27a19d12b5, type: 3}
-  mortalready: {fileID: 8300000, guid: ba21d77e446d14c4f905dfa09bd326df, type: 3}
-  droneready: {fileID: 8300000, guid: 35c9ba9f958920c4a951508ebfaffc4d, type: 3}
+  handgunready: {fileID: 0}
+  shotgunready: {fileID: 0}
+  rocketready: {fileID: 0}
+  mortalready: {fileID: 0}
+  droneready: {fileID: 0}
   manager: {fileID: 0}
   handgun: {fileID: 4014779510934448016}
   shotgun: {fileID: 8931196547531942365}
@@ -21125,7 +21125,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.293
   m_Pitch: 1
   Loop: 0
   Mute: 0
