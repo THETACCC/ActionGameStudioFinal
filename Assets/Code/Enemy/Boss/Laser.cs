@@ -57,7 +57,7 @@ public class Laser : MonoBehaviour
                     playerHealthUI.health -= 10;
                     bool isCriticalHit = true;
                     DamagePopup.Create(gameObject.transform.position, 10, isCriticalHit);
-
+                    playerControll.TakeDamage();
                     playerControll.isinvisible = true;
                 }
 

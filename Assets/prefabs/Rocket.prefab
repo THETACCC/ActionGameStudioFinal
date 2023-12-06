@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.8, y: 4.95, z: 0}
-  m_LocalScale: {x: 0.6026917, y: 3.0014527, z: 3.0014527}
+  m_LocalScale: {x: 1.2845771, y: 6.3972964, z: 6.3972964}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2235221751116571119}
@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
-  speed: 15
+  speed: 40
   Dummy: {fileID: 0}
   explosionRadiusIndicator: {fileID: 6386716629207483333, guid: 0ea28593728ac634686550c1e2340f6c, type: 3}
   explosion: {fileID: 2497961956166245765}

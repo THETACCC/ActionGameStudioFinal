@@ -12,10 +12,10 @@ public class PlayerHealthUI : MonoBehaviour
     public player_controller controller;
     public float health, maxhealth = 100;
     float lerpSpeed;
-
+    private bool restarted = false;
     private void Start()
     {
-        
+        restarted = false;
     }
 
     private void Update()
@@ -30,7 +30,12 @@ public class PlayerHealthUI : MonoBehaviour
         //ColorChanger();
         if(health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if(!restarted)
+            {
+                SceneController.instance.RestartLevel();
+                restarted = true;
+            }
+
         }
 
 

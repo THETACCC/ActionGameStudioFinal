@@ -60,6 +60,7 @@ public class EnemyBullet : MonoBehaviour
                 DamagePopup.Create(gameObject.transform.position, 10, isCriticalHit);
                 Destroy(gameObject);
                 playerControll.isinvisible = true;
+                playerControll.TakeDamage();
             }
             else
             {

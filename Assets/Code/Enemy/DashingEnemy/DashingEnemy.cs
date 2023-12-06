@@ -22,7 +22,7 @@ public class DashingEnemy : MonoBehaviour
     private float moveDirection = 1;
     private bool facingRight = true;
     [SerializeField] Transform playerpos;
-
+    private SpriteRenderer spriteRenderer;
     //Movement
     private float current_speed = 0f;
     public float acceleration = 5f;
@@ -43,9 +43,10 @@ public class DashingEnemy : MonoBehaviour
     public bool isshield = true;
 
     //mannual trigger
-    public bool triggered = false;  
+    public bool triggered = false;
 
-
+    //particles
+    [SerializeField] private ParticleSystem explosion = default;
     private enum State
     {
         Idle,
@@ -58,6 +59,7 @@ public class DashingEnemy : MonoBehaviour
     void Start()
     {
         dashspeedHype = dashspeed * 3;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Myrb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         PlayerUI = GameObject.FindGameObjectWithTag("UI");
@@ -86,6 +88,8 @@ public class DashingEnemy : MonoBehaviour
                 }
 
                 Myrb.velocity = new Vector2(current_speed * moveDirection, Myrb.velocity.y);
+
+
                 if (triggered)
                 {
                     state = State.SpotPlayer;
@@ -170,7 +174,10 @@ public class DashingEnemy : MonoBehaviour
         triggered = true;
         Debug.Log("ok");
     }
-
+    void killself()
+    {
+        Destroy(gameObject);
+    }
     public void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 direction = (Myrb.position - (Vector2)collision.transform.position).normalized;
@@ -179,7 +186,10 @@ public class DashingEnemy : MonoBehaviour
 
         if ((collision.gameObject.tag == "ShotgunBullet") && !isshield)
         {
-            Destroy(gameObject);
+
+            explosion.Play();
+            Invoke("killself", 0.5f);
+            spriteRenderer.sprite = null;
         }
 
 
@@ -191,6 +201,7 @@ public class DashingEnemy : MonoBehaviour
                 bool isCriticalHit = true;
                 DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
                 playerControll.isinvisible = true;
+                playerControll.TakeDamage();
             }
         }
 

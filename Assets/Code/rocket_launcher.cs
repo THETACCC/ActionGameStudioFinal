@@ -45,6 +45,9 @@ public class rocket_launcher : MonoBehaviour
     //ammo
     public float ammo;
 
+    //public bool
+    public bool changetarget = false;
+
     void Start()
     {
         ammo = 3;
@@ -111,8 +114,23 @@ public class rocket_launcher : MonoBehaviour
     {
         GameObject rocket = Instantiate(rocketPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = rocket.GetComponent<Rigidbody2D>();
+        Homing_Rocket homing = rocket.GetComponent<Homing_Rocket>();
+        if(!changetarget)
+        {
+            homing.target = GameObject.FindGameObjectWithTag("Dummy").transform;
+        }
+        else
+        {
+            homing.target = GameObject.FindGameObjectWithTag("Boss").transform;
+        }
+
         rb.velocity = firePoint.up * rocketSpeed;
         Destroy(rocket, rocketLifeTime);
+    }
+
+    public void TargetChange()
+    {
+        changetarget = true;
     }
 
     System.Collections.IEnumerator RecoilEffect()

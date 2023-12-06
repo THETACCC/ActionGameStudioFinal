@@ -19,7 +19,7 @@ public class Homing_Rocket : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Boss").transform;
+        //target = GameObject.FindGameObjectWithTag("Boss").transform;
     }
 
     void Update()

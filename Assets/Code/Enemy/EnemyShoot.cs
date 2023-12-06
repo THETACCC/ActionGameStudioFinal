@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,6 +97,11 @@ public class EnemyShoot : MonoBehaviour
     //invisible time
     private float invisibletime = 0f;
     private bool isinvisible = false;
+
+
+    //Cinemachine 
+    private CinemachineImpulseSource impluseSrouce;
+
     private enum State
     {
         Idle,
@@ -126,6 +132,7 @@ public class EnemyShoot : MonoBehaviour
 
     void Start()
     {
+        impluseSrouce = GetComponent<CinemachineImpulseSource>();
         Health = 10000;
         Myrb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -139,6 +146,11 @@ public class EnemyShoot : MonoBehaviour
 
     void Update()
     {
+        if(Health <= 0f)
+        {
+            Destroy(gameObject);
+        }
+
         if(!isactivate)
         {
             return;
@@ -308,7 +320,7 @@ public class EnemyShoot : MonoBehaviour
 
                             int attack = UnityEngine.Random.Range(0, 29);
 
-                            if (attack == 0 || attack == 1 || attack == 2)
+                            if (attack == 0 || attack == 1 || attack == 2 || attack == 24)
                             {
                                 state = State.HeavyAttackV2;
                             }
@@ -324,15 +336,15 @@ public class EnemyShoot : MonoBehaviour
                             {
                                 state = State.SpamAttackV2;
                             }
-                            else if (attack == 13 || attack == 14 || attack == 15)
+                            else if (attack == 13 || attack == 14 || attack == 15 || attack == 23)
                             {
                                 state = State.LaserAttackV2;
                             }
-                            else if (attack == 16 || attack == 17)
+                            else if (attack == 16 || attack == 17 || attack == 22)
                             {
                                 state = State.SpamAttackSpawnBlock;
                             }
-                            else if (attack == 18 || attack == 19 || attack == 20 || attack == 21 || attack == 22 || attack == 23 || attack == 24)
+                            else if (attack == 18 || attack == 19 || attack == 20 || attack == 21)
                             {
                                 state = State.RageDashV2;
                             }
@@ -634,6 +646,7 @@ public class EnemyShoot : MonoBehaviour
 
     void LaserAttack()
     {
+
         current_speed = Mathf.Clamp(current_speed, -1, 1);
         current_vspeed = Mathf.Clamp(current_vspeed, -1, 1);
         LaserGun.SetActive(true);
@@ -872,6 +885,7 @@ public class EnemyShoot : MonoBehaviour
 
     void LaserAttackV2()
     {
+
         current_speed = Mathf.Clamp(current_speed, -10, 10);
         current_vspeed = Mathf.Clamp(current_vspeed, -10, 10);
         LaserGun.SetActive(true);
@@ -1018,6 +1032,7 @@ public class EnemyShoot : MonoBehaviour
                 bool isCriticalHit = true;
                 DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
                 playerControll.isinvisible = true;
+                playerControll.TakeDamage();
             }
         }
 

@@ -10,8 +10,15 @@ public class Elevator : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 endPosition;
     public bool startmoving = false;
+
+    public GameObject player;
+    public player_controller controller;
+
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        controller = player.GetComponent<player_controller>();
+
         startPosition = transform.position;
         endPosition = new Vector3(transform.position.x, transform.position.y + targetHeight, transform.position.z);
     }
@@ -21,6 +28,7 @@ public class Elevator : MonoBehaviour
         // Trigger to start the elevator, replace this with your own condition
         if (startmoving)
         {
+            controller.istalking= true;
             StartCoroutine(MoveElevator());
         }
     }
@@ -38,5 +46,6 @@ public class Elevator : MonoBehaviour
         }
         startmoving = false;
         isMoving = false;
+
     }
 }

@@ -132,7 +132,7 @@ MonoBehaviour:
     info:
       content_localID: 0
       speaker_localID: 0
-      content: Your Command is already dead in my hand!
+      content: Your Command was already dead in my hand
       speaker: Command?
       avatar: {fileID: 0}
       audio: {fileID: 0}
@@ -150,8 +150,8 @@ MonoBehaviour:
     uid: 294624
     rect:
       serializedVersion: 2
-      x: 633
-      y: 298
+      x: 622
+      y: 303
       width: 100
       height: 130
     oRect:

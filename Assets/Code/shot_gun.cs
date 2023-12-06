@@ -96,7 +96,7 @@ public class shot_gun : MonoBehaviour
                 Shoot();
             }
         }
-
+        
         if (starteffect)
         {
             Vector3 newScale = pivot.localScale;
@@ -106,7 +106,7 @@ public class shot_gun : MonoBehaviour
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, -10)), Time.deltaTime * effect_speed);
 
             Debug.Log(newScale.x);
-            if (newScale.y <= 0.64f)
+            if (newScale.y <= 0.85f)
             {
                 starteffect = false;
             }
@@ -119,7 +119,7 @@ public class shot_gun : MonoBehaviour
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, 0)), Time.deltaTime * effect_speed);
         }
-
+        
 
     }
 

@@ -5,6 +5,7 @@ using SKCell;
 using CodeMonkey.Utils;
 using CodeMonkey;
 using Unity.VisualScripting;
+using Cinemachine;
 
 public class player_controller : MonoBehaviour
 {
@@ -116,10 +117,11 @@ public class player_controller : MonoBehaviour
     //dialogues
     public bool istalking = false;
 
-
+    //Cinemachine 
+    private CinemachineImpulseSource impluseSrouce;
     private void Start()
     {
-
+        impluseSrouce = GetComponent<CinemachineImpulseSource>();
         wall_jump_delay_countdown = wall_jump_delay;
     }
 
@@ -650,5 +652,11 @@ public class player_controller : MonoBehaviour
         color.a = alpha;
         spriteRenderer.color = color;
     }
+
+    public void TakeDamage()
+    {
+        CameraShakeManager.instance.CameraShake(impluseSrouce);
+    }
+
 
 }
