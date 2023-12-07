@@ -291,11 +291,11 @@ public class EnemyShoot : MonoBehaviour
                             {
                                 state = State.HeavyAttack;
                             }
-                            else if (attack == 3 || attack == 4 || attack == 5)
+                            else if (attack == 3 || attack == 4 || attack == 5 || attack == 9)
                             {
                                 state = State.SuperSpam;
                             }
-                            else if (attack == 6 || attack == 7 || attack == 8 || attack == 9)
+                            else if (attack == 6 || attack == 7 || attack == 8 )
                             {
                                 state = State.RageDash;
                             }
@@ -340,11 +340,11 @@ public class EnemyShoot : MonoBehaviour
                             {
                                 state = State.LaserAttackV2;
                             }
-                            else if (attack == 16 || attack == 17 || attack == 22)
+                            else if (attack == 16 || attack == 17 || attack == 22 || attack == 21)
                             {
                                 state = State.SpamAttackSpawnBlock;
                             }
-                            else if (attack == 18 || attack == 19 || attack == 20 || attack == 21)
+                            else if (attack == 18 || attack == 19 || attack == 20 )
                             {
                                 state = State.RageDashV2;
                             }
@@ -929,7 +929,7 @@ public class EnemyShoot : MonoBehaviour
         {
             current_vspeed -= acceleration * Time.deltaTime * 3;
         }
-        if (ragetimer >= 15)
+        if (ragetimer >= 7)
         {
             normalmovement = true;
             ragetimer = 0;
@@ -962,7 +962,7 @@ public class EnemyShoot : MonoBehaviour
         {
             current_vspeed -= acceleration * Time.deltaTime * 6;
         }
-        if (ragetimer >= 15)
+        if (ragetimer >= 7)
         {
             normalmovement = true;
             ragetimer = 0;

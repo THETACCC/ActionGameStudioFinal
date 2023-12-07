@@ -79,10 +79,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  speed: 800
+  speed: 1600
   nextWaypointDistance: 6
   flyingenemy: {fileID: 6716393269031769634}
-  detectdistance: 120
+  detectdistance: 800
   explosion: {fileID: 4473612798067456873}
   explosionradius: {fileID: 3859461407848295691}
 --- !u!50 &1418501188941980464
