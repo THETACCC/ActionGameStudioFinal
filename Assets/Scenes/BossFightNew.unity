@@ -105818,6 +105818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2957323454974803920, guid: 7f53b2b2bd3df1e4a8770f88b4ea9285, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5611320157649582191, guid: 7f53b2b2bd3df1e4a8770f88b4ea9285, type: 3}
       propertyPath: grapplingGun
       value: 

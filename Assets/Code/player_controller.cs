@@ -11,9 +11,9 @@ public class player_controller : MonoBehaviour
 {
     public float horizontal = 0f;
     public float acceleration = 5f;
-    private float decceleration = 100f;
-    private float max_hspeed = 70f;
-    private float max_hspeed_dash =130f;
+    private float decceleration = 200f;
+    private float max_hspeed = 100f;
+    private float max_hspeed_dash =150f;
     public float speed = 2f;
     public float jump_power = 16f;
     private float current_speed_right = 0f;
@@ -32,7 +32,7 @@ public class player_controller : MonoBehaviour
     private float dashingspeed = 0f;
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 110f;
+    private float dashingPower = 140f;
     private float dashingTime = 0.25f;
     private float dashingCooldown = 2f;
     public float dashingCooldownRef = 1f;
@@ -77,6 +77,8 @@ public class player_controller : MonoBehaviour
     private bool iswallsliding;
     private float wallSlidingSpeed = 4f;
     private float wallSliding_MaxHspseed= 3f;
+    private bool momemtumreset = false;
+
 
     private bool isWallJumping;
     private float wallJumpingDirection;
@@ -94,7 +96,7 @@ public class player_controller : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform wallCheck_left;
     [SerializeField] private LayerMask wallLayer;
-
+    [SerializeField] private GameObject wallCheckOBJ;
     //Animations
     public Animator animator;
 
@@ -119,6 +121,16 @@ public class player_controller : MonoBehaviour
 
     //Cinemachine 
     private CinemachineImpulseSource impluseSrouce;
+    //private void Awake()
+    //{
+    //    DontDestroyOnLoad(gameObject);
+    // }
+
+    //Visual Effects
+    [SerializeField] ParticleSystem jumpvfx;
+    [SerializeField] ParticleSystem jumpvfx2;
+
+    [SerializeField] ParticleSystem walljumpvfx;
     private void Start()
     {
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
@@ -130,7 +142,11 @@ public class player_controller : MonoBehaviour
 
         if (istalking)
         {
-            animator.SetFloat("Speed", (current_speed_left + current_speed_right) / 2);
+            current_speed_left = 0f;
+            current_speed_right = 0f;
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsWallSlide", false);
             return;
 
         }
@@ -211,7 +227,7 @@ public class player_controller : MonoBehaviour
 
         if (!isDashing)
         {
-            rb.gravityScale = 15f;
+            rb.gravityScale = 23f;
 
             dashingspeed = Mathf.MoveTowards(dashingspeed, 0, decceleration * Time.deltaTime * 2);
 
@@ -293,17 +309,30 @@ public class player_controller : MonoBehaviour
         }
 
 
-
-        if (Input.GetKey(KeyCode.LeftShift) && ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))))
+        
+        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A)) && DashCoolDown >= 1f)
         {
-            current_running_speed += accerlation_running * Time.deltaTime;
+            if (!iswallsliding)
+            {
+                isinvisible = true;
+                DashDirection = -1f;
+                DashCoolDown = 0f;
+                StartCoroutine(Dash());
+            }
         }
-        else
+        else if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.D)) && DashCoolDown >= 1f)
         {
-            current_running_speed = 1f;
+            if (!iswallsliding)
+            {
+                isinvisible = true;
+                DashDirection = 1f;
+                DashCoolDown = 0f;
+                StartCoroutine(Dash());
+            }
         }
 
 
+        current_running_speed = 1.1f;
         horizontal = rb.velocity.x;
 
         Wallslide();
@@ -316,7 +345,7 @@ public class player_controller : MonoBehaviour
   
 
 
-        animator.SetFloat("Speed", (current_speed_left + current_speed_right) / 2);
+        animator.SetFloat("Speed", (current_speed_left + current_speed_right) );
 
 
 
@@ -365,6 +394,8 @@ public class player_controller : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded() && !iswallsliding)
         {
+            jumpvfx.Play();
+            jumpvfx2.Play();
             rb.velocity = new Vector2(rb.velocity.x, jump_power);
             jumpmomemtum = rb.velocity.x;
             start_counting = true;
@@ -380,6 +411,8 @@ public class player_controller : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && !IsGrounded() && !iswallsliding && !isWallJumping && !doublejump && (jump_reset <= 0))
         {
+            jumpvfx.Play();
+            jumpvfx2.Play();
             jumpmomemtum = rb.velocity.x;
             doublejump = true;
             rb.velocity = new Vector2(rb.velocity.x, jump_power);
@@ -389,6 +422,8 @@ public class player_controller : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && !IsGrounded() && !iswallsliding && !triplejump && !isWallJumping && (jump_reset_triple <=0))
         {
+            jumpvfx.Play();
+            jumpvfx2.Play();
             jumpmomemtum = rb.velocity.x;
             triplejump = true;
             rb.velocity = new Vector2(rb.velocity.x, jump_power);
@@ -407,12 +442,17 @@ public class player_controller : MonoBehaviour
 
     private bool IsWalled()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.6f, groundLayer);
+        Collider2D collider = wallCheck.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            return collider.IsTouchingLayers(groundLayer);
+        }
+        return false;
     }
 
     private bool IsWalled_Left()
     {
-        return Physics2D.OverlapCircle(wallCheck_left.position, 0.6f, groundLayer);
+        return Physics2D.OverlapCircle(wallCheck_left.position, 0f, groundLayer);
     }
 
 
@@ -421,6 +461,14 @@ public class player_controller : MonoBehaviour
         if((IsWalled() && !IsGrounded() && !Input.GetButtonDown("Jump") && !IsWalled_Left()))
         {
             iswallsliding = true;
+            /*
+            if (iswallsliding && !momemtumreset)
+            {
+                current_speed_left = 0;
+                current_speed_right = 0;
+                momemtumreset = true;
+            }
+            */
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
             //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
 
@@ -428,11 +476,20 @@ public class player_controller : MonoBehaviour
         else if ((IsWalled_Left() && !IsGrounded() && !Input.GetButtonDown("Jump") && !IsWalled()))
         {
             iswallsliding = true;
+            /*
+            if (iswallsliding && !momemtumreset)
+            {
+                current_speed_left = 0;
+                current_speed_right = 0;
+                momemtumreset = true;
+            }
+            */
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
             iswallsliding = false;
+            momemtumreset = false;
         }
     }
 
@@ -504,9 +561,11 @@ public class player_controller : MonoBehaviour
             wallJumpingAcceleration += acceleration * Time.deltaTime;
             if (IsWalled())
             {
+
+                walljumpvfx.Play();
                 Debug.Log("Walljump");
                 //rb.AddForce(new Vector2(-40f,jump_power),ForceMode2D.Impulse);
-                jump_velocity = new Vector2(transform.localScale.x *  -40f * wallJumpingAcceleration , jump_power);
+                jump_velocity = new Vector2(transform.localScale.x *  -110f , jump_power);
                rb.velocity = new Vector2(jump_velocity.x, jump_velocity.y);
             }
 

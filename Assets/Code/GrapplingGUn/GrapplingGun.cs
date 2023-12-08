@@ -168,7 +168,7 @@ public class GrapplingGun : MonoBehaviour
             startcounting = false;
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
-            m_rigidbody.gravityScale = 15f;
+            m_rigidbody.gravityScale = 23f;
         }
         else
         {
