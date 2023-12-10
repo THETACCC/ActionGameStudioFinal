@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 3258843603153786083}
   m_Layer: 0
   m_Name: DashingEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -29.09832, y: 19.363585, z: -9.1211}
-  m_LocalScale: {x: 2.486927, y: 2.486927, z: 2.486927}
+  m_LocalScale: {x: 3.9107533, y: 3.9107533, z: 3.9107533}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5338746677375349372}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthUI: {fileID: 0}
   PlayerUI: {fileID: 0}
-  detectdistance: 30
+  detectdistance: 120
   force: 25
   movespeed: 10
   playerpos: {fileID: 0}

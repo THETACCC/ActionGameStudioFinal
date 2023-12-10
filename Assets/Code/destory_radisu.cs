@@ -47,6 +47,7 @@ public class destory_radisu : MonoBehaviour
                 bool isCriticalHit = true;
                 DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
                 playerControll.isinvisible = true;
+                playerControll.TakeDamage();
             }
         }
         if (collision.gameObject.tag == "Boss")

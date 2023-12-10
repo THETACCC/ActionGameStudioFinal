@@ -18,7 +18,7 @@ public class slimeenemymovc : MonoBehaviour
     [Header("For Jump Attack")]
     [SerializeField] float jumpheight1;
     [SerializeField] float jumpheight2;
-    [SerializeField] Transform player;
+    //[SerializeField] Transform player;
     [SerializeField] Transform groundcheckattack;
     [SerializeField] Vector2 boxsize;
     [SerializeField] private bool isgrounded;
@@ -28,16 +28,36 @@ public class slimeenemymovc : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     private bool canseeplayer;
     private Animator enemyAnim;
-
+    public Animator deathanimation;
 
     [Header("Others")]
     private Rigidbody2D enemyRB;
     private SpriteRenderer renderer;
+    //particles
+    [SerializeField] private ParticleSystem explosion = default;
+
+
+    //Player Ref
+    private player_controller playerControll;
+
+    public PlayerHealthUI playerHealthUI;
+    public GameObject PlayerUI;
+    private GameObject player;
+
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         enemyRB = GetComponent<Rigidbody2D>();
         enemyAnim = GetComponent<Animator>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerUI = GameObject.FindGameObjectWithTag("UI");
+        if (PlayerUI != null)
+        {
+            playerHealthUI = PlayerUI.GetComponent<PlayerHealthUI>();
+        }
+        playerControll = player.GetComponent<player_controller>();
+
     }
 
     // Update is called once per frame
@@ -61,9 +81,9 @@ public class slimeenemymovc : MonoBehaviour
 
     void Patrolling()
     {
-        if(!checkingGround || checkingWall)
+        if (!checkingGround || checkingWall)
         {
-            if(facingRight)
+            if (facingRight)
             {
                 Flip();
             }
@@ -78,11 +98,11 @@ public class slimeenemymovc : MonoBehaviour
 
     void JumpAttack()
     {
-        float distanceFromPlayer = player.position.x - transform.position.x;
+        float distanceFromPlayer = player.transform.position.x - transform.position.x;
 
         if (isgrounded)
         {
-            enemyRB.AddForce(new Vector2(distanceFromPlayer * 4, Random.Range(jumpheight1,jumpheight2)), ForceMode2D.Impulse);
+            enemyRB.AddForce(new Vector2(distanceFromPlayer * 4, Random.Range(jumpheight1, jumpheight2)), ForceMode2D.Impulse);
         }
 
 
@@ -91,8 +111,8 @@ public class slimeenemymovc : MonoBehaviour
     void FlipTowardsPlayer()
     {
 
-        float playerposition = player.position.x - transform.position.x;
-        if(playerposition < 0 && facingRight)
+        float playerposition = player.transform.position.x - transform.position.x;
+        if (playerposition < 0 && facingRight)
         {
             Flip();
         }
@@ -125,13 +145,45 @@ public class slimeenemymovc : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "HandgunBullet")
+        if (collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "HandgunBullet" || collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super")
         {
-            Destroy(gameObject);
+            deathanimation.SetBool("Death", true);
+            StartCoroutine(FadeOutSprite(0.5f));
+            explosion.Play();
         }
         else
         {
             Flip();
+        }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            if (!playerControll.isinvisible)
+            {
+                playerHealthUI.health -= 10;
+                bool isCriticalHit = true;
+                DamagePopup.Create(collision.gameObject.transform.position, 10, isCriticalHit);
+                playerControll.isinvisible = true;
+                playerControll.TakeDamage();
+                Flip();
+            }
+        }
+
+    }
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
+    }
+
+    private IEnumerator FadeOutSprite(float duration)
+    {
+        float counter = 0;
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            float alpha = Mathf.Lerp(1, 0, counter / duration);
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, alpha);
+            yield return null;
         }
     }
 

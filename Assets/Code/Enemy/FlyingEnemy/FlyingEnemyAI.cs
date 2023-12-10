@@ -92,6 +92,12 @@ public class FlyingEnemyAI : MonoBehaviour
             }
 
         }
+        float distancefromplayer = Vector2.Distance(transform.position, Target.transform.position);
+        if (distancefromplayer < 20)
+        {
+            readytoExplode = true;
+        }
+
     }
 
     // Update is called once per frame
@@ -195,7 +201,13 @@ public class FlyingEnemyAI : MonoBehaviour
             spriteRenderer.sprite = null;
             Invoke("killself", 1f);
         }
-
+        else if (collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super")
+        {
+            explosionradius.SetActive(true);
+            explosion.Play();
+            spriteRenderer.sprite = null;
+            Invoke("killself", 1f);
+        }
 
     }
 

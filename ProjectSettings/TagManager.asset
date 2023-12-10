@@ -20,7 +20,7 @@ TagManager:
   - SeekerEnemy
   - UI
   - Boss
-  - EnemyBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -55,6 +55,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 2566797355
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

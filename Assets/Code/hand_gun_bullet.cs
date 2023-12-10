@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,13 @@ public class hand_gun_bullet : MonoBehaviour
     public Rigidbody2D rb;
     //effects
     private float speed = 2f;
+
+    public MMFeedbacks deadfeedback;
+    private SpriteRenderer renderer;
+    private bool effectplayed = false;
     void Update()
     {
+        renderer = GetComponent<SpriteRenderer>();
         Vector3 newScale = transform.localScale;
         newScale.x = Mathf.Lerp(newScale.x, 0.5f, Time.deltaTime * speed);
         newScale.y = Mathf.Lerp(newScale.y, 2f, Time.deltaTime * speed);
@@ -32,8 +38,16 @@ public class hand_gun_bullet : MonoBehaviour
 
         if (!(collision.gameObject.tag == "InvisibleWall"))
         {
-            Destroy(gameObject);
+            renderer.enabled = false;
+            rb.velocity = new Vector2 (0f, 0f);
+            if(effectplayed == false)
+            {
+                deadfeedback?.PlayFeedbacks();
+                effectplayed = true;
+            }
+
         }
+
 
     }
 }

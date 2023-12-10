@@ -8023,7 +8023,6 @@ MonoBehaviour:
     m_Bits: 64
   jumpheight1: 6
   jumpheight2: 12
-  player: {fileID: 137377314}
   groundcheckattack: {fileID: 1207717174}
   boxsize: {x: 0.5, y: 0.1}
   isgrounded: 0
@@ -8031,6 +8030,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  deathanimation: {fileID: 0}
+  explosion: {fileID: 0}
+  playerHealthUI: {fileID: 0}
+  PlayerUI: {fileID: 0}
 --- !u!50 &200365798
 Rigidbody2D:
   serializedVersion: 4
@@ -18266,7 +18269,6 @@ MonoBehaviour:
     m_Bits: 64
   jumpheight1: 6
   jumpheight2: 12
-  player: {fileID: 137377314}
   groundcheckattack: {fileID: 1052345904}
   boxsize: {x: 0.5, y: 0.1}
   isgrounded: 0
@@ -18274,6 +18276,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  deathanimation: {fileID: 0}
+  explosion: {fileID: 0}
+  playerHealthUI: {fileID: 0}
+  PlayerUI: {fileID: 0}
 --- !u!50 &419290081
 Rigidbody2D:
   serializedVersion: 4
@@ -22331,7 +22337,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 66
+  orthographic size: 90
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -84513,7 +84519,7 @@ MonoBehaviour:
   m_Follow: {fileID: 137377314}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 66
+    OrthographicSize: 90
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -105820,7 +105826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2957323454974803920, guid: 7f53b2b2bd3df1e4a8770f88b4ea9285, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5611320157649582191, guid: 7f53b2b2bd3df1e4a8770f88b4ea9285, type: 3}
       propertyPath: grapplingGun

@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
-  speed: 40
+  speed: 80
   Dummy: {fileID: 0}
   explosionRadiusIndicator: {fileID: 6386716629207483333, guid: 0ea28593728ac634686550c1e2340f6c, type: 3}
   explosion: {fileID: 2497961956166245765}

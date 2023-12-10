@@ -124,6 +124,7 @@ public class switch_weapon : MonoBehaviour
             {
                 playsound = false;
             }
+            /*
             if(handgun.ammo <= 0.99)
             {
                 if (selectedWeapon >= transform.childCount - 1)
@@ -133,7 +134,7 @@ public class switch_weapon : MonoBehaviour
 
                 SelectWeapon();
             }
-
+            */
 
             if (shotgun.ammo < 5)
             {
@@ -155,7 +156,7 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 1)
         {
-
+            /*
             if (shotgun.ammo <= 0.99)
             {
                 if (selectedWeapon >= transform.childCount - 1)
@@ -165,7 +166,7 @@ public class switch_weapon : MonoBehaviour
 
                 SelectWeapon();
             }
-
+            */
 
             if (handgun.ammo < 60)
             {
@@ -188,7 +189,7 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 2)
         {
-
+            /*
             if (rocketLauncher.ammo <= 0.99)
             {
                 if (selectedWeapon >= transform.childCount - 1)
@@ -198,7 +199,7 @@ public class switch_weapon : MonoBehaviour
 
                 SelectWeapon();
             }
-
+            */
             if (handgun.ammo < 60)
             {
                 handgun.ammo += 12f * Time.deltaTime;
@@ -220,7 +221,7 @@ public class switch_weapon : MonoBehaviour
         }
         else if (selectedWeapon == 3)
         {
-
+            /*
             if (TNTLauncher.ammo <= 0.99)
             {
                 if (selectedWeapon >= transform.childCount - 1)
@@ -230,7 +231,7 @@ public class switch_weapon : MonoBehaviour
 
                 SelectWeapon();
             }
-
+            */
             if (handgun.ammo < 60)
             {
                 handgun.ammo += 12f * Time.deltaTime;

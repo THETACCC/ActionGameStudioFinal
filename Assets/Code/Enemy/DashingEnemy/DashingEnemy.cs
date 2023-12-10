@@ -191,7 +191,12 @@ public class DashingEnemy : MonoBehaviour
             Invoke("killself", 0.5f);
             spriteRenderer.sprite = null;
         }
-
+        else if (collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super")
+        {
+            explosion.Play();
+            spriteRenderer.sprite = null;
+            Invoke("killself", 0.5f);
+        }
 
         if (collision.gameObject.tag == "Player")
         {

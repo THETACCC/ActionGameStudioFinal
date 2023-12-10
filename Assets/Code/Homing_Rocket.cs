@@ -19,7 +19,7 @@ public class Homing_Rocket : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //target = GameObject.FindGameObjectWithTag("Boss").transform;
+        UpdateTarget(); // Initial target update
     }
 
     void Update()
@@ -85,7 +85,31 @@ public class Homing_Rocket : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void UpdateTarget()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestEnemy = null;
 
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null) // You can adjust the range as needed
+        {
+            target = nearestEnemy.transform;
+        }
+        else
+        {
+            target = null;
+        }
+    }
 
 
 }

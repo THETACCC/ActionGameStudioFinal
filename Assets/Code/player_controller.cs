@@ -6,6 +6,7 @@ using CodeMonkey.Utils;
 using CodeMonkey;
 using Unity.VisualScripting;
 using Cinemachine;
+using MoreMountains.Feedbacks;
 
 public class player_controller : MonoBehaviour
 {
@@ -125,11 +126,15 @@ public class player_controller : MonoBehaviour
     //{
     //    DontDestroyOnLoad(gameObject);
     // }
+    [Header("Feedbacks")]
+    /// a feedback to call when moving
+    [Tooltip("damage taken")]
+    public MMFeedbacks chromatic;
 
     //Visual Effects
     [SerializeField] ParticleSystem jumpvfx;
     [SerializeField] ParticleSystem jumpvfx2;
-
+    [SerializeField] ParticleSystem damagevfx;
     [SerializeField] ParticleSystem walljumpvfx;
     private void Start()
     {
@@ -310,7 +315,7 @@ public class player_controller : MonoBehaviour
 
 
         
-        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.A)) && DashCoolDown >= 1f)
+        if (Input.GetKey(KeyCode.LeftShift) && !isFacingRight && DashCoolDown >= 1f)
         {
             if (!iswallsliding)
             {
@@ -320,7 +325,7 @@ public class player_controller : MonoBehaviour
                 StartCoroutine(Dash());
             }
         }
-        else if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey(KeyCode.D)) && DashCoolDown >= 1f)
+        else if (Input.GetKey(KeyCode.LeftShift) && isFacingRight && DashCoolDown >= 1f)
         {
             if (!iswallsliding)
             {
@@ -602,6 +607,7 @@ public class player_controller : MonoBehaviour
     
     private void Flip()
     {
+        if (iswallsliding) return;
         if (((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f)) && !isflipping)
         {
 
@@ -714,6 +720,8 @@ public class player_controller : MonoBehaviour
 
     public void TakeDamage()
     {
+        damagevfx.Play();
+        chromatic?.PlayFeedbacks();
         CameraShakeManager.instance.CameraShake(impluseSrouce);
     }
 
