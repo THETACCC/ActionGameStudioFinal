@@ -39,6 +39,10 @@ public class TNT_launcher : MonoBehaviour
     public WeaponMotion motion;
     //ammo
     public float ammo;
+
+    //Sound Ref
+    public bool playsound = false;
+    public bool noammosound = false;
     void Start()
     {
         ammo = 6;
@@ -46,7 +50,11 @@ public class TNT_launcher : MonoBehaviour
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
+    void OnEnable()
+    {
+        playsound = false;
+        noammosound = false;
+    }
     void Update()
     {
 
@@ -67,6 +75,7 @@ public class TNT_launcher : MonoBehaviour
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
             if (myWeapon.nextFireTime == 0)
             {
+                playsound = true;
                 ammo -= 1;
                 shotgunfire.Play();
                 CameraShakeManager.instance.CameraShake(impluseSrouce);
@@ -74,6 +83,18 @@ public class TNT_launcher : MonoBehaviour
                 starteffect = true;
                 Shoot();
             }
+            else
+            {
+                playsound = false;
+            }
+        }
+        else if (Input.GetButton("Fire1") && (ammo < 0.99))
+        {
+            noammosound = true;
+        }
+        else if (Input.GetButtonUp("Fire1") && (ammo < 0.99))
+        {
+            noammosound = false;
         }
 
         if (starteffect)

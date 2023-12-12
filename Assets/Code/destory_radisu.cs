@@ -14,9 +14,10 @@ public class destory_radisu : MonoBehaviour
     public GameObject player;
     public PlayerHealthUI playerHealthUI;
     public GameObject PlayerUI;
-
+    private Collider2D collider;
     private void Start()
     {
+        collider = GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         PlayerUI = GameObject.FindGameObjectWithTag("UI");
         if (PlayerUI != null)
@@ -52,6 +53,7 @@ public class destory_radisu : MonoBehaviour
         }
         if (collision.gameObject.tag == "Boss")
         {
+            collider.enabled= false;
             Destroy(this.gameObject);
         }
     }

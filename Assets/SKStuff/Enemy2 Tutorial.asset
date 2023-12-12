@@ -200,7 +200,7 @@ MonoBehaviour:
     info:
       content_localID: 0
       speaker_localID: 0
-      content: To kill them. You have to use your shotgun.
+      content: To kill them. You have to use your shotgun or explosives.
       speaker: Command
       avatar: {fileID: 0}
       audio: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
       content_localID: 0
       speaker_localID: 0
       content: Basically, use your MACHINEGUN to disable the sheild. Then use SHOTGUN
-        to kill it.
+        or EXPLOSIVES to kill it.
       speaker: Command
       avatar: {fileID: 0}
       audio: {fileID: 0}

@@ -22,6 +22,14 @@ public class switch_weapon : MonoBehaviour
     public AudioClip mortalready;
     public AudioClip droneready;
 
+
+    //no ammo sounds
+    public AudioClip handgunNoAmmo;
+    public AudioClip shotgunNoAmmo;
+    public AudioClip rocketNoAmmo;
+    public AudioClip mortalNoAmmo;
+    public AudioClip droneNoAmmo;
+
     private bool handgunplayed = false;
     private bool shotgunplayed = false;
     private bool rocketplayed = false;
@@ -38,6 +46,17 @@ public class switch_weapon : MonoBehaviour
 
     //sound stuff
     private bool playsound = false;
+    private bool noAmmoHandGun = false;
+
+    private bool shotgunplaysound = false;
+    private bool noAmmoShotGun = false;
+
+    private bool rocketplaysound = false;
+    private bool noAmmoRocket = false;
+
+
+    private bool TNTplaysound = false;
+    private bool noAmmoTNT = false;
 
     void Start()
     {
@@ -51,6 +70,7 @@ public class switch_weapon : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(handgun.ammo);
         int previousSelectedWeapon = selectedWeapon;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -72,7 +92,7 @@ public class switch_weapon : MonoBehaviour
 
 
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             // Scroll up
             if (selectedWeapon >= transform.childCount - 1)
@@ -80,7 +100,7 @@ public class switch_weapon : MonoBehaviour
             else
                 selectedWeapon++;
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             // Scroll down
             if (selectedWeapon <= 0)
@@ -124,6 +144,19 @@ public class switch_weapon : MonoBehaviour
             {
                 playsound = false;
             }
+
+            if (handgun.noammosound== true)
+            {
+                if(noAmmoHandGun == false)
+                {
+                    audioSource.PlayOneShot(handgunNoAmmo);
+                    noAmmoHandGun = true;
+                }
+            }
+            else if (handgun.noammosound == false)
+            {
+                noAmmoHandGun = false;
+            }
             /*
             if(handgun.ammo <= 0.99)
             {
@@ -149,10 +182,6 @@ public class switch_weapon : MonoBehaviour
                 rocketLauncher.ammo += 0.5f * Time.deltaTime;
             }
 
-            if (Input.GetButton("Fire1") && manager.weapons[0].nextFireTime == 0 && handgun.ammo >0)
-            {
-                handgunplayed = false;
-            }
         }
         else if (selectedWeapon == 1)
         {
@@ -167,6 +196,40 @@ public class switch_weapon : MonoBehaviour
                 SelectWeapon();
             }
             */
+            if (shotgun.playsound == true)
+            {
+                //Debug.Log(shotgunplaysound);
+
+                if (shotgunplaysound == false)
+                {
+                    //Debug.Log("Play");
+                    audioSource.PlayOneShot(shotgunSound);
+                    shotgunplaysound = true;
+                }
+
+
+            }
+            else if (shotgun.playsound == false)
+            {
+             
+                shotgunplaysound = false;
+            }
+
+
+            if (shotgun.noammosound == true)
+            {
+                if (noAmmoShotGun == false)
+                {
+                    audioSource.PlayOneShot(handgunNoAmmo);
+                    noAmmoShotGun = true;
+                }
+            }
+            else if (shotgun.noammosound == false)
+            {
+                noAmmoShotGun = false;
+            }
+
+
 
             if (handgun.ammo < 60)
             {
@@ -181,11 +244,7 @@ public class switch_weapon : MonoBehaviour
                 TNTLauncher.ammo += 0.66f * Time.deltaTime;
             }
 
-            if (Input.GetButton("Fire1") && manager.weapons[1].nextFireTime == 0 && shotgun.ammo > 0)
-            {
-                audioSource.PlayOneShot(shotgunSound);
-                shotgunplayed = false;
-            }
+
         }
         else if (selectedWeapon == 2)
         {
@@ -200,6 +259,40 @@ public class switch_weapon : MonoBehaviour
                 SelectWeapon();
             }
             */
+            if (rocketLauncher.playsound == true)
+            {
+                //Debug.Log(shotgunplaysound);
+
+                if (rocketplaysound == false)
+                {
+                    //Debug.Log("Play");
+                    audioSource.PlayOneShot(RocketSound);
+                    rocketplaysound = true;
+                }
+
+
+            }
+            else if (rocketLauncher.playsound == false)
+            {
+                rocketplaysound = false;
+            }
+
+
+
+            if (rocketLauncher.noammosound == true)
+            {
+                if (noAmmoRocket == false)
+                {
+                    audioSource.PlayOneShot(handgunNoAmmo);
+                    noAmmoRocket = true;
+                }
+            }
+            else if (rocketLauncher.noammosound == false)
+            {
+                noAmmoRocket = false;
+            }
+
+
             if (handgun.ammo < 60)
             {
                 handgun.ammo += 12f * Time.deltaTime;
@@ -213,11 +306,7 @@ public class switch_weapon : MonoBehaviour
                 TNTLauncher.ammo += 0.66f * Time.deltaTime;
             }
 
-            if (Input.GetButton("Fire1") && manager.weapons[2].nextFireTime == 0 && rocketLauncher.ammo > 0)
-            {
-                audioSource.PlayOneShot(RocketSound);
-                rocketplayed = false;
-            }
+ 
         }
         else if (selectedWeapon == 3)
         {
@@ -232,6 +321,43 @@ public class switch_weapon : MonoBehaviour
                 SelectWeapon();
             }
             */
+
+            if (TNTLauncher.playsound == true)
+            {
+                //Debug.Log(shotgunplaysound);
+
+                if (TNTplaysound == false)
+                {
+                    //Debug.Log("Play");
+                    audioSource.PlayOneShot(mortalSound);
+                    TNTplaysound = true;
+                }
+
+
+            }
+            else if (TNTLauncher.playsound == false)
+            {
+                TNTplaysound = false;
+            }
+
+
+            if (TNTLauncher.noammosound == true)
+            {
+                if (noAmmoTNT == false)
+                {
+                    audioSource.PlayOneShot(handgunNoAmmo);
+                    noAmmoTNT = true;
+                }
+            }
+            else if (TNTLauncher.noammosound == false)
+            {
+                noAmmoTNT = false;
+            }
+
+
+
+
+
             if (handgun.ammo < 60)
             {
                 handgun.ammo += 12f * Time.deltaTime;
@@ -245,37 +371,63 @@ public class switch_weapon : MonoBehaviour
                 rocketLauncher.ammo += 0.5f * Time.deltaTime;
             }
 
-            if (Input.GetButton("Fire1") && manager.weapons[3].nextFireTime == 0 && TNTLauncher.ammo > 0)
-            {
-                audioSource.PlayOneShot(mortalSound);
-                mortalplayed = false;
-            }
+
         }
 
-        if (manager.weapons[0].nextFireTime == 0  && !handgunplayed && !Input.GetButtonDown("Fire1"))
+        if (handgun.ammo >= 60)
         {
-            audioSource.PlayOneShot(handgunready);
-            handgunplayed = true;
+            if(handgunplayed == false)
+            {
+                audioSource.PlayOneShot(handgunready);
+                handgunplayed = true;
+            }
+
         }
-        else if (manager.weapons[1].nextFireTime == 0  && !shotgunplayed && !Input.GetButtonDown("Fire1"))
+        else if (handgun.ammo < 60)
         {
-            audioSource.PlayOneShot(shotgunready);
-            shotgunplayed = true;
+            handgunplayed = false;
         }
-        else if (manager.weapons[2].nextFireTime == 0  && !rocketplayed && !Input.GetButtonDown("Fire1"))
+
+        if (shotgun.ammo >= 5)
         {
-            audioSource.PlayOneShot(rocketready);
-            rocketplayed = true;
+            if (shotgunplayed == false)
+            {
+                audioSource.PlayOneShot(shotgunready);
+                shotgunplayed = true;
+            }
+
         }
-        else if (manager.weapons[3].nextFireTime == 0  && !mortalplayed && !Input.GetButtonDown("Fire1"))
+        else if (shotgun.ammo < 5)
         {
-            audioSource.PlayOneShot(mortalready);
-            mortalplayed = true;
+            shotgunplayed = false;
         }
-        else if (manager.weapons[4].nextFireTime == 0 && !droneplayed && !Input.GetButtonDown("Fire1"))
+
+        if (rocketLauncher.ammo >= 3)
         {
-            audioSource.PlayOneShot(droneready);
-            droneplayed = true;
+            if (rocketplayed == false)
+            {
+                audioSource.PlayOneShot(rocketready);
+                rocketplayed = true;
+            }
+
+        }
+        else if (rocketLauncher.ammo < 3)
+        {
+            rocketplayed = false;
+        }
+
+        if (TNTLauncher.ammo >= 6)
+        {
+            if (mortalplayed == false)
+            {
+                audioSource.PlayOneShot(mortalready);
+                mortalplayed = true;
+            }
+
+        }
+        else if (rocketLauncher.ammo < 6)
+        {
+            mortalplayed = false;
         }
 
     }

@@ -44,7 +44,14 @@ public class DashingEnemy : MonoBehaviour
 
     //mannual trigger
     public bool triggered = false;
+    //sound
+    public GameObject soundObject;
+    private bool soundplayed = false;
 
+
+    public AudioSource audioSource;
+    public AudioClip soundClip;
+    private bool sheildbreaksound = false;
     //particles
     [SerializeField] private ParticleSystem explosion = default;
     private enum State
@@ -75,6 +82,16 @@ public class DashingEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isshield)
+        {
+            if(!sheildbreaksound)
+            {
+                audioSource.PlayOneShot(soundClip);
+                sheildbreaksound= true;
+            }
+        }
+
+
         current_speed = Mathf.Clamp(current_speed, 0, max_hspeed);
         switch (state)
         {
@@ -186,13 +203,22 @@ public class DashingEnemy : MonoBehaviour
 
         if ((collision.gameObject.tag == "ShotgunBullet") && !isshield)
         {
-
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             explosion.Play();
             Invoke("killself", 0.5f);
             spriteRenderer.sprite = null;
         }
-        else if (collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super")
+        else if (collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super" || collision.gameObject.tag == "Rocket")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             explosion.Play();
             spriteRenderer.sprite = null;
             Invoke("killself", 0.5f);

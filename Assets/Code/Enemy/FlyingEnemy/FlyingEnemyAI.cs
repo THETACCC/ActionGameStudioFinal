@@ -40,7 +40,11 @@ public class FlyingEnemyAI : MonoBehaviour
     //radius
     public GameObject explosionradius;
 
-
+    //sound
+    public GameObject soundObject;
+    public AudioSource audioSource;
+    public AudioClip soundClip;
+    private bool soundplayed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -174,6 +178,7 @@ public class FlyingEnemyAI : MonoBehaviour
             else
             {
                 spriteRenderer.color = Color.black;
+                audioSource.PlayOneShot(soundClip);
             }
             isRed = !isRed;
 
@@ -189,6 +194,11 @@ public class FlyingEnemyAI : MonoBehaviour
     {
         if ((collision.gameObject.tag == "ShotgunBullet"))
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             explosionradius.SetActive(true);
             explosion.Play();
             spriteRenderer.sprite = null;
@@ -196,6 +206,11 @@ public class FlyingEnemyAI : MonoBehaviour
         }
         else if ((collision.gameObject.tag == "HandgunBullet"))
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             explosionradius.SetActive(true);
             explosion.Play();
             spriteRenderer.sprite = null;
@@ -203,6 +218,11 @@ public class FlyingEnemyAI : MonoBehaviour
         }
         else if (collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             explosionradius.SetActive(true);
             explosion.Play();
             spriteRenderer.sprite = null;

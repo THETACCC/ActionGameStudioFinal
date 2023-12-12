@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class PlayerHealthUI : MonoBehaviour
     public float health, maxhealth = 100;
     float lerpSpeed;
     private bool restarted = false;
+    private Coroutine lowHealthCoroutine;
+    public MMFeedbacks lowhealth;
     private void Start()
     {
         restarted = false;
@@ -28,7 +31,14 @@ public class PlayerHealthUI : MonoBehaviour
         }
         CooldownBarFiller();
         //ColorChanger();
-        if(health <= 0)
+        if (health <= 20 && health > 0)
+        {
+            if (lowHealthCoroutine == null)
+            {
+                lowHealthCoroutine = StartCoroutine(PlayLowHealthFeedback());
+            }
+        }
+        else if(health <= 0)
         {
             if(!restarted)
             {
@@ -53,7 +63,14 @@ public class PlayerHealthUI : MonoBehaviour
 
     }
 
-
+    private IEnumerator PlayLowHealthFeedback()
+    {
+        while (true)
+        {
+            lowhealth?.PlayFeedbacks();
+            yield return new WaitForSeconds(2.5f);
+        }
+    }
     void CooldownBarFiller()
     {
         CooldownBar.fillAmount = Mathf.Lerp(CooldownBar.fillAmount, (health / maxhealth), lerpSpeed);

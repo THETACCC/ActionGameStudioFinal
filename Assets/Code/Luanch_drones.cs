@@ -76,7 +76,7 @@ public class Luanch_drones : MonoBehaviour
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, -10)), Time.deltaTime * effect_speed);
 
-            Debug.Log(newScale.x);
+            //Debug.Log(newScale.x);
             if (newScale.y <= 0.64f)
             {
                 starteffect = false;

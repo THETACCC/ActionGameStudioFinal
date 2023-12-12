@@ -7,6 +7,7 @@ using CodeMonkey;
 using Unity.VisualScripting;
 using Cinemachine;
 using MoreMountains.Feedbacks;
+using System.Drawing;
 
 public class player_controller : MonoBehaviour
 {
@@ -33,9 +34,9 @@ public class player_controller : MonoBehaviour
     private float dashingspeed = 0f;
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 140f;
+    private float dashingPower = 150f;
     private float dashingTime = 0.25f;
-    private float dashingCooldown = 2f;
+    private float dashingCooldown = 1f;
     public float dashingCooldownRef = 1f;
     [SerializeField] private TrailRenderer tr;
 
@@ -130,7 +131,11 @@ public class player_controller : MonoBehaviour
     /// a feedback to call when moving
     [Tooltip("damage taken")]
     public MMFeedbacks chromatic;
-
+    [Tooltip("jump")]
+    public MMFeedbacks jumpFeedBack;
+    [Tooltip("dash")]
+    public MMFeedbacks dashFeedBack;
+    public MMFeedbacks dashReadyFeedBack;
     //Visual Effects
     [SerializeField] ParticleSystem jumpvfx;
     [SerializeField] ParticleSystem jumpvfx2;
@@ -159,7 +164,7 @@ public class player_controller : MonoBehaviour
         if (isinvisible)
         {
             invisibletime += Time.deltaTime;
-            if (invisibletime >= 1.5f)
+            if (invisibletime >= 0.5f)
             {
                 isinvisible = false;
                 invisibletime = 0f;
@@ -273,6 +278,7 @@ public class player_controller : MonoBehaviour
                 {
                     DashDirection = -1f;
                     DashCoolDown = 0f;
+                    dashFeedBack?.PlayFeedbacks();
                     StartCoroutine(Dash());
                     isinvisible = true;
                 }
@@ -299,6 +305,7 @@ public class player_controller : MonoBehaviour
                     isinvisible = true;
                     DashDirection = 1f;
                     DashCoolDown = 0f;
+                    dashFeedBack?.PlayFeedbacks();
                     StartCoroutine(Dash());
                 }
             }
@@ -322,6 +329,7 @@ public class player_controller : MonoBehaviour
                 isinvisible = true;
                 DashDirection = -1f;
                 DashCoolDown = 0f;
+                dashFeedBack?.PlayFeedbacks();
                 StartCoroutine(Dash());
             }
         }
@@ -332,6 +340,7 @@ public class player_controller : MonoBehaviour
                 isinvisible = true;
                 DashDirection = 1f;
                 DashCoolDown = 0f;
+                dashFeedBack?.PlayFeedbacks();
                 StartCoroutine(Dash());
             }
         }
@@ -405,6 +414,7 @@ public class player_controller : MonoBehaviour
             jumpmomemtum = rb.velocity.x;
             start_counting = true;
             jump_reset = jump_reset_timer;
+            jumpFeedBack?.PlayFeedbacks();
 
         }
 
@@ -416,6 +426,7 @@ public class player_controller : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && !IsGrounded() && !iswallsliding && !isWallJumping && !doublejump && (jump_reset <= 0))
         {
+            jumpFeedBack?.PlayFeedbacks();
             jumpvfx.Play();
             jumpvfx2.Play();
             jumpmomemtum = rb.velocity.x;
@@ -427,6 +438,7 @@ public class player_controller : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && !IsGrounded() && !iswallsliding && !triplejump && !isWallJumping && (jump_reset_triple <=0))
         {
+            jumpFeedBack?.PlayFeedbacks();
             jumpvfx.Play();
             jumpvfx2.Play();
             jumpmomemtum = rb.velocity.x;
@@ -566,7 +578,7 @@ public class player_controller : MonoBehaviour
             wallJumpingAcceleration += acceleration * Time.deltaTime;
             if (IsWalled())
             {
-
+                jumpFeedBack?.PlayFeedbacks();
                 walljumpvfx.Play();
                 Debug.Log("Walljump");
                 //rb.AddForce(new Vector2(-40f,jump_power),ForceMode2D.Impulse);
@@ -650,6 +662,7 @@ public class player_controller : MonoBehaviour
         rb.velocity = new Vector2(DashDirection * dashingPower * current_running_speed , 0f);
         dashingspeed = rb.velocity.x;
         tr.emitting= true;
+        spriteRenderer.color = new UnityEngine.Color(0, 0, 0, 1);
         Debug.Log($"IsGrounded: {IsGrounded()}");
         if (!IsGrounded())
         {
@@ -670,9 +683,10 @@ public class player_controller : MonoBehaviour
         isDashing= false;
         StartCoroutine(SmoothTransitionToMaxSpeed());
         dashingCooldownRef = 0f;
+        spriteRenderer.color = new UnityEngine.Color(1, 1, 1, 1);
         yield return new WaitForSeconds(dashingCooldown);
-
-        canDash= true;
+        dashReadyFeedBack?.PlayFeedbacks();
+        canDash = true;
 
     }
 
@@ -713,7 +727,7 @@ public class player_controller : MonoBehaviour
 
     private void SetSpriteAlpha(float alpha)
     {
-        Color color = spriteRenderer.color;
+        UnityEngine.Color color = spriteRenderer.color;
         color.a = alpha;
         spriteRenderer.color = color;
     }

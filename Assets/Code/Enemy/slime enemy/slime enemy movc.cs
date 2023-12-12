@@ -33,6 +33,7 @@ public class slimeenemymovc : MonoBehaviour
     [Header("Others")]
     private Rigidbody2D enemyRB;
     private SpriteRenderer renderer;
+    private BoxCollider2D collider;
     //particles
     [SerializeField] private ParticleSystem explosion = default;
 
@@ -44,12 +45,16 @@ public class slimeenemymovc : MonoBehaviour
     public GameObject PlayerUI;
     private GameObject player;
 
+    //sound
+    public GameObject soundObject;
+
+
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         enemyRB = GetComponent<Rigidbody2D>();
         enemyAnim = GetComponent<Animator>();
-
+        collider = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         PlayerUI = GameObject.FindGameObjectWithTag("UI");
         if (PlayerUI != null)
@@ -145,9 +150,11 @@ public class slimeenemymovc : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "HandgunBullet" || collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super")
+        if (collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "HandgunBullet" || collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super" || collision.gameObject.tag == "Rocket")
         {
+            GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
             deathanimation.SetBool("Death", true);
+            collider.enabled = false;
             StartCoroutine(FadeOutSprite(0.5f));
             explosion.Play();
         }

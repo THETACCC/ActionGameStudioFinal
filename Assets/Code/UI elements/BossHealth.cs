@@ -10,10 +10,12 @@ public class BossHealth : MonoBehaviour
     public EnemyShoot Boss;
     public float health, maxhealth = 10000;
     float lerpSpeed;
-
+    public Color originalcolor;
     private void Start()
     {
-        
+        originalcolor = CooldownBar.color;
+
+
     }
 
     private void Update()
@@ -26,7 +28,7 @@ public class BossHealth : MonoBehaviour
             health = maxhealth;
         }
         CooldownBarFiller();
-        ColorChanger();
+        //ColorChanger();
     }
 
     bool DisplayHealthPoint(float _health, int pointNumber)
@@ -35,7 +37,7 @@ public class BossHealth : MonoBehaviour
     }
     void ColorChanger()
     {
-        Color CooldownColor = Color.Lerp(Color.red, Color.green, (health / maxhealth));
+        Color CooldownColor = Color.Lerp(Color.red, originalcolor, (health / maxhealth));
 
         CooldownBar.color = CooldownColor;
 

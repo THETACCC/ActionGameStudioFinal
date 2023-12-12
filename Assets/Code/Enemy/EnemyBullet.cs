@@ -69,5 +69,9 @@ public class EnemyBullet : MonoBehaviour
 
         }
 
+        if (collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_alone" || collision.gameObject.tag == "explosion_rocket" || collision.gameObject.tag == "explosion_super" || collision.gameObject.tag == "HandgunBullet" || collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "Rocket" || collision.gameObject.tag == "TNT")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -65,6 +65,11 @@ public class GrapplingGun : MonoBehaviour
     public Mycursor cursor;
 
 
+    //sound ref
+    public AudioSource audioSource;
+    public AudioClip soundClip;
+    public AudioClip ReadySound;
+    private bool playreadysound = true;
     private void Start()
     {
         cooldowntimer = 3f;
@@ -79,11 +84,20 @@ public class GrapplingGun : MonoBehaviour
         {
             cooldowntimer += Time.deltaTime;
         }
+        if (cooldowntimer >= 3f)
+        {
+            if (playreadysound == false) 
+            {
+                audioSource.PlayOneShot(ReadySound, 0.2f);
+                playreadysound = true;
+            }
 
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && cooldowntimer >= 3f)
         {
             SetGrapplePoint();
+            audioSource.PlayOneShot(soundClip);
             Grapenabled = true;
             storedVelocity = m_rigidbody.velocity;
         }
@@ -163,8 +177,6 @@ public class GrapplingGun : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1) || Grapenabled == false)
         {
-            controller.doublejump = false;
-            controller.triplejump= false;
             startcounting = false;
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
@@ -221,6 +233,7 @@ public class GrapplingGun : MonoBehaviour
                     grappleRope.enabled = true;
                     startcounting = true;
                     cooldowntimer = 0f;
+                    playreadysound = false;
                     Debug.Log("FOUND");
                 }
             }

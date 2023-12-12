@@ -253,8 +253,8 @@ MonoBehaviour:
     uid: 918203
     rect:
       serializedVersion: 2
-      x: 868
-      y: 1019
+      x: 901
+      y: 964
       width: 100
       height: 130
     oRect:

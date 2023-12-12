@@ -38,6 +38,9 @@ public class ReloadEffect : MonoBehaviour
     private bool countdown = false;
 
 
+
+
+
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -113,14 +116,6 @@ public class ReloadEffect : MonoBehaviour
         else
         {
             rectTransform.localPosition = Vector3.Lerp(rectTransform.localPosition, originalPosition, Time.deltaTime * lerpSpeed);
-            if (manage.weapons[theweapon].nextFireTime <= 0)
-            {
-                currentColor.a = Mathf.Lerp(currentColor.a, 0.45f, Time.deltaTime * fadeSpeed);
-            }
-            else
-            {
-                currentColor.a = Mathf.Lerp(currentColor.a, 0.05f, Time.deltaTime * fadeSpeed); // Alpha set to 0.05 when reloading
-            }
         }
 
         textMesh.color = currentColor;

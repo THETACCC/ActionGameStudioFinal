@@ -49,6 +49,10 @@ public class shot_gun : MonoBehaviour
     //ammo
     public float ammo;
 
+
+    //Sound Ref
+    public bool playsound = false;
+    public bool noammosound = false;
     void Start()
     {
         ammo = 5;
@@ -57,7 +61,11 @@ public class shot_gun : MonoBehaviour
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
+    void OnEnable()
+    {
+        playsound = false;
+        noammosound = false;
+    }
     void Update()
     {
 
@@ -78,6 +86,7 @@ public class shot_gun : MonoBehaviour
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
             if (myWeapon.nextFireTime == 0)
             {
+                playsound = true;
                 ammo -= 1;
                 shotgunfire.Play();
                 if (mousePosition.x < transform.position.x)
@@ -95,8 +104,19 @@ public class shot_gun : MonoBehaviour
                 //StartCoroutine(RecoilEffect());
                 Shoot();
             }
+            else
+            {
+                playsound = false;
+            }
         }
-        
+        else if (Input.GetButton("Fire1") && (ammo < 0.99))
+        {
+            noammosound = true;
+        }
+        else if (Input.GetButtonUp("Fire1") && (ammo < 0.99))
+        {
+            noammosound = false;
+        }
         if (starteffect)
         {
             Vector3 newScale = pivot.localScale;
@@ -105,7 +125,7 @@ public class shot_gun : MonoBehaviour
             pivot.localScale = newScale;
             pivot.rotation = Quaternion.Lerp(pivot.rotation, Quaternion.Euler(new Vector3(0, 0, -10)), Time.deltaTime * effect_speed);
 
-            Debug.Log(newScale.x);
+            //Debug.Log(newScale.x);
             if (newScale.y <= 0.85f)
             {
                 starteffect = false;

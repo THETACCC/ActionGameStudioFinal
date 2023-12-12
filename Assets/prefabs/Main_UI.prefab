@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5696580936369341897}
   - component: {fileID: 3207318785982938712}
   - component: {fileID: 7661055804716345828}
+  - component: {fileID: 5503133630936002743}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -110,6 +111,24 @@ MonoBehaviour:
   manage: {fileID: 0}
   theweapon: 0
   weaponswitch: {fileID: 0}
+--- !u!114 &5503133630936002743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004832576464263833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61bf0f4c525ed442b5e983c4a58bd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponmanager: {fileID: 0}
+  manage: {fileID: 0}
+  handgun: {fileID: 0}
+  theweapon: 0
+  weaponswitch: {fileID: 0}
+  fadeSpeed: 5
 --- !u!1 &1559420099389528656
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3497858395172634282}
   - component: {fileID: 7878943639340188276}
+  - component: {fileID: 7155032155664732075}
   - component: {fileID: 4269981807926556856}
   - component: {fileID: 7699926992068951104}
   m_Layer: 5
@@ -553,7 +573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.3}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -596, y: -873}
+  m_AnchoredPosition: {x: -652, y: -910}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7878943639340188276
@@ -564,7 +584,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3155056943920757322}
   m_CullTransparentMesh: 1
---- !u!114 &4269981807926556856
+--- !u!114 &7155032155664732075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -572,6 +592,24 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3155056943920757322}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61bf0f4c525ed442b5e983c4a58bd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponmanager: {fileID: 0}
+  manage: {fileID: 0}
+  handgun: {fileID: 0}
+  theweapon: 0
+  weaponswitch: {fileID: 0}
+  fadeSpeed: 5
+--- !u!114 &4269981807926556856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155056943920757322}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b570c6724adea0409db272698a27aa2, type: 3}
   m_Name: 
@@ -680,6 +718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430681109484867517}
   - component: {fileID: 4243333651741251622}
+  - component: {fileID: 6501578248389868419}
   - component: {fileID: 748079710166809758}
   - component: {fileID: 5486449721083877369}
   m_Layer: 5
@@ -706,7 +745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.3}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -322, y: -883}
+  m_AnchoredPosition: {x: -412, y: -967}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4243333651741251622
@@ -717,7 +756,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3300915477986991932}
   m_CullTransparentMesh: 1
---- !u!114 &748079710166809758
+--- !u!114 &6501578248389868419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,6 +764,24 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3300915477986991932}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55433d473430694782dff711cc5bc7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponmanager: {fileID: 0}
+  manage: {fileID: 0}
+  shotgun: {fileID: 0}
+  theweapon: 1
+  weaponswitch: {fileID: 0}
+  fadeSpeed: 5
+--- !u!114 &748079710166809758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300915477986991932}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b570c6724adea0409db272698a27aa2, type: 3}
   m_Name: 
@@ -925,6 +982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7999823830182319434}
   - component: {fileID: 6207947368065340398}
+  - component: {fileID: 2266521487062601222}
   - component: {fileID: 4481855391341817778}
   - component: {fileID: 7577735851674479667}
   m_Layer: 5
@@ -951,7 +1009,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.3}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 322, y: -881}
+  m_AnchoredPosition: {x: 241, y: -886}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6207947368065340398
@@ -961,13 +1019,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5111017556458161474}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b570c6724adea0409db272698a27aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponmanager: {fileID: 0}
   manage: {fileID: 0}
+  theweapon: 3
+  weaponswitch: {fileID: 0}
+  fadeSpeed: 5
+--- !u!114 &2266521487062601222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5111017556458161474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c081a559c9d8f54ba9720727f4a91c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponmanager: {fileID: 0}
+  manage: {fileID: 0}
+  TNT: {fileID: 0}
   theweapon: 3
   weaponswitch: {fileID: 0}
   fadeSpeed: 5
@@ -1397,6 +1473,7 @@ GameObject:
   - component: {fileID: 8490456498864035941}
   - component: {fileID: 6092843351961545731}
   - component: {fileID: 364099672503176141}
+  - component: {fileID: 7076034284937706696}
   - component: {fileID: 4597361470531767464}
   m_Layer: 5
   m_Name: Rocket
@@ -1422,7 +1499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.3}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 7, y: -878}
+  m_AnchoredPosition: {x: -49, y: -906}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6092843351961545731
@@ -1432,7 +1509,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8949913487786699236}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b570c6724adea0409db272698a27aa2, type: 3}
   m_Name: 
@@ -1450,6 +1527,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8949913487786699236}
   m_CullTransparentMesh: 1
+--- !u!114 &7076034284937706696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8949913487786699236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f6296580f555340b5ea1117e4ba51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponmanager: {fileID: 0}
+  manage: {fileID: 0}
+  rocket: {fileID: 0}
+  theweapon: 2
+  weaponswitch: {fileID: 0}
+  fadeSpeed: 5
 --- !u!114 &4597361470531767464
 MonoBehaviour:
   m_ObjectHideFlags: 0

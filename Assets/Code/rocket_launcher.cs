@@ -47,7 +47,9 @@ public class rocket_launcher : MonoBehaviour
 
     //public bool
     public bool changetarget = false;
-
+    //Sound Ref
+    public bool playsound = false;
+    public bool noammosound = false;
     void Start()
     {
         ammo = 3;
@@ -55,7 +57,11 @@ public class rocket_launcher : MonoBehaviour
         impluseSrouce = GetComponent<CinemachineImpulseSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
+    void OnEnable()
+    {
+        playsound = false;
+        noammosound = false;
+    }
     void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -75,6 +81,7 @@ public class rocket_launcher : MonoBehaviour
             Weapon myWeapon = weaponmanage.GetWeaponByName(weaponName);
             if (myWeapon.nextFireTime == 0)
             {
+                playsound = true;
                 ammo -= 1;
                 shotgunfire.Play();
                 CameraShakeManager.instance.CameraShake(impluseSrouce);
@@ -82,8 +89,20 @@ public class rocket_launcher : MonoBehaviour
                 starteffect = true;
                 Shoot();
             }
-        }
+            else
+            {
+                playsound = false;
+            }
 
+        }
+        else if (Input.GetButton("Fire1") && (ammo < 0.99))
+        {
+            noammosound = true;
+        }
+        else if (Input.GetButtonUp("Fire1") && (ammo < 0.99))
+        {
+            noammosound = false;
+        }
 
         if (starteffect)
         {

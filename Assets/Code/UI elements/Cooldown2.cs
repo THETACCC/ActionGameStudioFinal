@@ -8,7 +8,7 @@ public class Cooldown2 : MonoBehaviour
     public Text Cooldowntext;
     public Image CooldownBar;
     public GrapplingGun grapplingGun;
-    float cooldown, ready = 2;
+    float cooldown, ready = 3;
     float lerpSpeed;
 
     private void Start()
@@ -31,7 +31,7 @@ public class Cooldown2 : MonoBehaviour
 
     void ColorChanger()
     {
-        Color CooldownColor = Color.Lerp(Color.red, Color.yellow, (cooldown / ready));
+        Color CooldownColor = Color.Lerp(Color.yellow, Color.yellow, (cooldown / ready));
 
         CooldownBar.color = CooldownColor;
 

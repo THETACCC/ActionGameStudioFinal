@@ -15,6 +15,11 @@ public class hand_gun_bullet : MonoBehaviour
     public MMFeedbacks deadfeedback;
     private SpriteRenderer renderer;
     private bool effectplayed = false;
+
+    //sound
+    public GameObject soundObject;
+    private bool soundplayed = false;
+
     void Update()
     {
         renderer = GetComponent<SpriteRenderer>();
@@ -34,10 +39,19 @@ public class hand_gun_bullet : MonoBehaviour
 
             bool isCriticalHit = false;
             DamagePopup.Create(gameObject.transform.position, 25, isCriticalHit);
+            Destroy(gameObject);
         }
-
-        if (!(collision.gameObject.tag == "InvisibleWall"))
+        else if (collision.gameObject.tag == "EnemyBullet")
         {
+            Destroy(collision.gameObject);
+        }
+        else if (!(collision.gameObject.tag == "InvisibleWall"))
+        {
+            if (!soundplayed)
+            {
+                //GameObject.Instantiate(soundObject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             renderer.enabled = false;
             rb.velocity = new Vector2 (0f, 0f);
             if(effectplayed == false)

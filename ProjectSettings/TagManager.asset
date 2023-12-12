@@ -21,6 +21,7 @@ TagManager:
   - UI
   - Boss
   - Enemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

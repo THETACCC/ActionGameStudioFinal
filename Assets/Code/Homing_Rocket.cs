@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Homing_Rocket : MonoBehaviour
@@ -11,13 +12,24 @@ public class Homing_Rocket : MonoBehaviour
     public Transform target;
     public float speed = 5f;
     private Rigidbody2D rb;
+    private SpriteRenderer renderer;
+    private BoxCollider2D collider;
     public targetDummy Dummy;
     public GameObject explosionRadiusIndicator;
 
     //particles
     [SerializeField] private ParticleSystem explosion = default;
+
+    //audio
+    public GameObject Soundobject;
+    public AudioClip explosionSound;
+    private AudioSource audioSource;
+
     void Start()
     {
+        renderer = GetComponent<SpriteRenderer>();
+        collider= GetComponent<BoxCollider2D>();
+        audioSource= GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         UpdateTarget(); // Initial target update
     }
@@ -37,12 +49,15 @@ public class Homing_Rocket : MonoBehaviour
         explosion.Play();
         if (collision.gameObject.tag == "HandgunBullet" || collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "explosion" || collision.gameObject.tag == "Dummy" || collision.gameObject.tag == "TNT")
         {
+            GameObject.Instantiate(Soundobject, this.transform.position,Quaternion.identity);
+
             explosion.Play();
             Explode();
             StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "explosion_alone")
         {
+            GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
             Explode();
  
             //GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
@@ -50,18 +65,21 @@ public class Homing_Rocket : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Boss")
         {
+            GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
             explosion.Play();
             Explode();
             StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "EnemyBUllet")
         {
+            GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
             explosion.Play();
             Explode();
             Destroy(collision.gameObject);
         }
         else
         {
+            GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
             explosion.Play();
             Explode();
             StartCoroutine(SelfDestruct());
@@ -81,13 +99,19 @@ public class Homing_Rocket : MonoBehaviour
 
     private IEnumerator SelfDestruct()
     {
-        yield return new WaitForSeconds(0.05f);
+        renderer.enabled = false;
+        collider.enabled = false;
+        rb.velocity = new Vector2 (0 , 0);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemy1 = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
+
+        GameObject[] enemies = enemy1.Concat(bosses).ToArray();
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 

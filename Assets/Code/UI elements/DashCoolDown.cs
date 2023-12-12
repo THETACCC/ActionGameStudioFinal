@@ -31,7 +31,7 @@ public class DashCoolDown : MonoBehaviour
 
     void ColorChanger()
     {
-        Color CooldownColor = Color.Lerp(Color.red, Color.cyan, (cooldown / ready));
+        Color CooldownColor = Color.Lerp(Color.cyan, Color.cyan, (cooldown / ready));
 
         CooldownBar.color = CooldownColor;
 

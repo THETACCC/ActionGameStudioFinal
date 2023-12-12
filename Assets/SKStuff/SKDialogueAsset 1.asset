@@ -166,7 +166,8 @@ MonoBehaviour:
     info:
       content_localID: 0
       speaker_localID: 0
-      content: You can either use your shotgun or machinegun to kill it.
+      content: You can either use your shotgun, machinegun, or explosives to kill
+        it.
       speaker: Command
       avatar: {fileID: 0}
       audio: {fileID: 0}

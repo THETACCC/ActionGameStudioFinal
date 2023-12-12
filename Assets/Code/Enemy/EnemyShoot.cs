@@ -1,4 +1,5 @@
 using Cinemachine;
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,6 +51,8 @@ public class EnemyShoot : MonoBehaviour
     public GameObject LaserGun;
     private float lasertimer = 0;
     public GameObject LaserGun2;
+    public GameObject LaserGun3;
+    public GameObject LaserGun4;
     public float detectdistance;
     [SerializeField] float force;
 
@@ -97,10 +100,19 @@ public class EnemyShoot : MonoBehaviour
     //invisible time
     private float invisibletime = 0f;
     private bool isinvisible = false;
-
-
+    [Header("Feedbacks")]
+    /// a feedback to call when moving
+    [Tooltip("damage taken")]
+    public MMFeedbacks beinghit;
+    public MMFeedbacks useLaser;
+    public MMFeedbacks death;
     //Cinemachine 
     private CinemachineImpulseSource impluseSrouce;
+
+    //booleans
+    public bool LaserPlayed = false;
+    public bool startLaser = false;
+    public bool deathPlayed = false;
 
     private enum State
     {
@@ -124,6 +136,9 @@ public class EnemyShoot : MonoBehaviour
         LaserAttackV2,
         RageDash,
         RageDashV2,
+        HeavyAttackV3,
+        LaserAttackV3,
+        CenterSpamAttackV3
 
     }
 
@@ -148,7 +163,13 @@ public class EnemyShoot : MonoBehaviour
     {
         if(Health <= 0f)
         {
-            Destroy(gameObject);
+            if(!deathPlayed)
+            {
+                isactivate = false;
+                death?.PlayFeedbacks();
+                deathPlayed = true;
+            }
+
         }
 
         if(!isactivate)
@@ -166,7 +187,21 @@ public class EnemyShoot : MonoBehaviour
             }
         }
 
-        
+        if(startLaser)
+        {
+            if (Health > 5000)
+            {
+                LaserAttack();
+            }
+            else if (Health <= 5000 && Health > 1250)
+            {
+                LaserAttackV2();
+            }
+            else if (Health <= 1250)
+            {
+                LaserAttackV3();
+            }
+        }
 
         float distancefromplayer = Vector2.Distance(transform.position, player.transform.position);
         float playerpositionturn = playerpos.position.x - transform.position.x;
@@ -197,7 +232,7 @@ public class EnemyShoot : MonoBehaviour
                     current_vspeed -= acceleration * Time.deltaTime;
                 }
             }
-            else if (Health <= 5000)
+            else if (Health <= 5000 && Health > 1250)
             {
                 current_speed = Mathf.Clamp(current_speed, -max_hspeed * 1.5f, max_hspeed * 1.5f);
                 current_vspeed = Mathf.Clamp(current_vspeed, -max_vspeed * 1.5f, max_vspeed * 1.5f);
@@ -220,7 +255,29 @@ public class EnemyShoot : MonoBehaviour
                     current_vspeed -= acceleration * Time.deltaTime * 1.5f;
                 }
             }
+            else if (Health <= 1250)
+            {
+                current_speed = Mathf.Clamp(current_speed, -max_hspeed * 2f, max_hspeed * 2f);
+                current_vspeed = Mathf.Clamp(current_vspeed, -max_vspeed * 2f, max_vspeed * 2f);
 
+
+                if (playerpositionturn < 0)
+                {
+                    current_speed -= acceleration * Time.deltaTime * 2f;
+                }
+                else if (playerpositionturn > 0)
+                {
+                    current_speed += acceleration * Time.deltaTime * 2f;
+                }
+                if (playerverticaldist < 10)
+                {
+                    current_vspeed += acceleration * Time.deltaTime * 2f;
+                }
+                else if (playerverticaldist > 10)
+                {
+                    current_vspeed -= acceleration * Time.deltaTime * 2f;
+                }
+            }
 
             rotatetimer += Time.deltaTime;
         }
@@ -295,7 +352,7 @@ public class EnemyShoot : MonoBehaviour
                             {
                                 state = State.SuperSpam;
                             }
-                            else if (attack == 6 || attack == 7 || attack == 8 )
+                            else if (attack == 6 || attack == 7 || attack == 8)
                             {
                                 state = State.RageDash;
                             }
@@ -311,14 +368,14 @@ public class EnemyShoot : MonoBehaviour
 
                         }
                     }
-                    else if (Health <= 5000)
+                    else if (Health <= 5000 && Health > 1250)
                     {
                         timer += Time.deltaTime;
                         if (timer > 0.3)
                         {
                             timer = 0;
 
-                            int attack = UnityEngine.Random.Range(0, 29);
+                            int attack = UnityEngine.Random.Range(0, 31);
 
                             if (attack == 0 || attack == 1 || attack == 2 || attack == 24)
                             {
@@ -340,22 +397,50 @@ public class EnemyShoot : MonoBehaviour
                             {
                                 state = State.LaserAttackV2;
                             }
-                            else if (attack == 16 || attack == 17 || attack == 22 || attack == 21)
+                            else if (attack == 16 || attack == 17 || attack == 22 || attack == 21 || attack == 30)
                             {
                                 state = State.SpamAttackSpawnBlock;
                             }
-                            else if (attack == 18 || attack == 19 || attack == 20 )
+                            else if (attack == 18 || attack == 19 || attack == 20)
                             {
                                 state = State.RageDashV2;
                             }
-                            else if (attack == 25 || attack == 26 || attack == 27 || attack == 28)
+                            else if (attack == 25 || attack == 26 || attack == 27 || attack == 28 || attack == 29)
                             {
                                 state = State.SpamAttackSpawnBoomer;
                             }
 
                         }
                     }
+                    else if (Health <= 1250)
+                    {
+                        timer += Time.deltaTime;
+                        if (timer > 0.15)
+                        {
+                            timer = 0;
 
+                            int attack = UnityEngine.Random.Range(0, 29);
+
+                            if (attack == 0 || attack == 1 || attack == 2 || attack == 3)
+                            {
+                                state = State.SpamAttackSpawnBlock;
+
+                            }
+                            else if (attack == 4 || attack == 5 || attack == 6 || attack == 7 || attack == 8 || attack == 9)
+                            {
+                                state = State.HeavyAttackV3;
+                            }
+                            else if (attack == 10 || attack == 11 || attack == 12 || attack == 13 || attack == 14)
+                            {
+                                state = State.CenterSpamAttackV3;
+                            }
+                            else if (attack == 15 || attack == 16 || attack == 17 || attack == 18)
+                            {
+                                state = State.LaserAttackV3;
+                            }
+
+                        }
+                    }
                 }
                 //Myrb.velocity = Vector2.Lerp(Myrb.velocity, new Vector2(current_speed * moveDirection, current_vspeed * verticaldirection), Time.deltaTime * lerpspeed);
  
@@ -399,7 +484,13 @@ public class EnemyShoot : MonoBehaviour
                 break;
 
             case State.LaserAttack:
-                LaserAttack();
+                if(!LaserPlayed)
+                {
+                    useLaser?.PlayFeedbacks();
+                    LaserPlayed= true;
+                }
+
+                //LaserAttack();
 
                 break;
 
@@ -436,7 +527,12 @@ public class EnemyShoot : MonoBehaviour
 
                 break;
             case State.LaserAttackV2:
-                LaserAttackV2();
+                if (!LaserPlayed)
+                {
+                    useLaser?.PlayFeedbacks();
+                    LaserPlayed = true;
+                }
+
 
                 break;
             case State.RageDash:
@@ -464,20 +560,26 @@ public class EnemyShoot : MonoBehaviour
                     playerposChecked = true;
                 }
                 VerticalAttack();
+                break;
 
-
-
-
-
-
-
+            case State.HeavyAttackV3:
+                HeavyAttackV3();
 
                 break;
 
+            case State.CenterSpamAttackV3:
+                centerSpamV3();
+
+                break;
+            case State.LaserAttackV3:
+                if (!LaserPlayed)
+                {
+                    useLaser?.PlayFeedbacks();
+                    LaserPlayed = true;
+                }
 
 
-
-
+                break;
         }
 
 
@@ -644,9 +746,9 @@ public class EnemyShoot : MonoBehaviour
         }
     }
 
-    void LaserAttack()
+    public void LaserAttack()
     {
-
+        Debug.Log("Using Laser");
         current_speed = Mathf.Clamp(current_speed, -1, 1);
         current_vspeed = Mathf.Clamp(current_vspeed, -1, 1);
         LaserGun.SetActive(true);
@@ -657,9 +759,15 @@ public class EnemyShoot : MonoBehaviour
             LaserGun.SetActive(false);
             lasertimer = 0;
             state = State.SpotPlayer;
-
+            LaserPlayed = false;
+            startLaser = false;
         }
         
+    }
+
+    public void StartUsingLaser()
+    {
+        startLaser = true;
     }
 
 
@@ -899,6 +1007,8 @@ public class EnemyShoot : MonoBehaviour
             LaserGun2.SetActive(false);
             lasertimer = 0;
             state = State.SpotPlayer;
+            LaserPlayed = false;
+            startLaser = false;
 
         }
 
@@ -969,6 +1079,93 @@ public class EnemyShoot : MonoBehaviour
             state = State.SpotPlayer;
         }
     }
+    void HeavyAttackV3()
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            GameObject bullet_obj = Instantiate(bullet, bulletpos.position, Quaternion.identity);
+            Vector3 direction = player.transform.position - transform.position;
+            Rigidbody2D rb = bullet_obj.GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector2(direction.x + i * 7, direction.y + i * 7).normalized * force;
+        }
+
+
+        state = State.Idle;
+    }
+
+    void centerSpamV3()
+    {
+        current_speed = Mathf.Clamp(current_speed, -100, 100);
+        current_vspeed = Mathf.Clamp(current_vspeed, -100, 100);
+        if (centerspambullet < 7)
+        {
+            centerspamtimer += Time.deltaTime;
+            if (centerspamtimer > .66)
+            {
+                for (int i = 0; i < 24; i++)
+                {
+
+                    GameObject bullet_obj = Instantiate(bullet, bulletpos.position, Quaternion.identity);
+                    Vector3 direction = player.transform.position - transform.position;
+                    // Calculate the rotation angle for this bullet
+                    float rotationAngle = i * 15f;
+                    // Create a rotation Quaternion
+                    Quaternion rotation = Quaternion.Euler(0, 0, rotationAngle);
+
+                    // Rotate the direction vector by the rotation
+                    Vector3 rotatedDirection = rotation * direction.normalized;
+
+                    Rigidbody2D rb = bullet_obj.GetComponent<Rigidbody2D>();
+                    rb.velocity = rotatedDirection * force;
+
+                    // Apply the rotation to the bullet object for visual orientation
+                    bullet_obj.transform.rotation = rotation;
+
+                }
+                centerspamtimer = 0;
+                centerspambullet++;
+            }
+        }
+        else if (centerspambullet >= 7)
+        {
+
+            centerspambullet = 0;
+            state = State.SpotPlayer;
+        }
+
+    }
+
+    void LaserAttackV3()
+    {
+
+        current_speed = Mathf.Clamp(current_speed, -20, 20);
+        current_vspeed = Mathf.Clamp(current_vspeed, -20, 20);
+        LaserGun.SetActive(true);
+        LaserGun2.SetActive(true);
+        LaserGun3.SetActive(true);
+        LaserGun4.SetActive(true);
+        lasertimer += Time.deltaTime;
+        if (lasertimer >= 10)
+        {
+            LaserGun2.gameObject.transform.rotation = Quaternion.Euler(0, 0, -270);
+            LaserGun.gameObject.transform.rotation = Quaternion.Euler(0, 0, -90);
+            LaserGun3.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            LaserGun4.gameObject.transform.rotation = Quaternion.Euler(0, 0, -180);
+            LaserGun.SetActive(false);
+            LaserGun2.SetActive(false);
+            LaserGun4.SetActive(false);
+            LaserGun3.SetActive(false);
+            lasertimer = 0;
+            state = State.SpotPlayer;
+            LaserPlayed = false;
+            startLaser = false;
+
+        }
+
+    }
+
+
+
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -979,6 +1176,9 @@ public class EnemyShoot : MonoBehaviour
                 explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
                 explosion_handgun.Play();
                 Health -= 25;
+                Destroy(collision.gameObject);
+            beinghit?.PlayFeedbacks();
+
             }
             else if (collision.gameObject.tag == "ShotgunBullet")
             {
@@ -987,6 +1187,9 @@ public class EnemyShoot : MonoBehaviour
                 explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
                 explosion_handgun.Play();
                 Health -= 50;
+            Destroy(collision.gameObject);
+            beinghit?.PlayFeedbacks();
+
             }
             else if (collision.gameObject.tag == "explosion" && !isinvisible)
             {
@@ -994,6 +1197,10 @@ public class EnemyShoot : MonoBehaviour
                 DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
                 Health -= 100;
                 isinvisible = true;
+                Destroy(collision.gameObject);
+                beinghit?.PlayFeedbacks();
+
+
 
             }
             else if (collision.gameObject.tag == "explosion_alone" && !isinvisible)
@@ -1001,7 +1208,9 @@ public class EnemyShoot : MonoBehaviour
                 bool isCriticalHit = false;
                 DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
                 Health -= 100;
+                Destroy(collision.gameObject);
                 isinvisible = true;
+                beinghit?.PlayFeedbacks();
             }
             else if (collision.gameObject.tag == "explosion_rocket" && !isinvisible)
             {
@@ -1010,8 +1219,10 @@ public class EnemyShoot : MonoBehaviour
 
                 explosionsmall.transform.position = collision.transform.position + new Vector3(1, 0, 0);
                 explosionsmall.Play();
-                Health -= 150;
-                isinvisible = true;
+            Destroy(collision.gameObject);
+            Health -= 150;
+            beinghit?.PlayFeedbacks();
+            isinvisible = true;
 
             }
             else if (collision.gameObject.tag == "explosion_super" && !isinvisible)
@@ -1022,6 +1233,8 @@ public class EnemyShoot : MonoBehaviour
                 explosionsmall.Play();
                 Health -= 500;
                 isinvisible = true;
+            beinghit?.PlayFeedbacks();
+            Destroy(collision.gameObject);
             }
 
         if (collision.gameObject.tag == "Player")

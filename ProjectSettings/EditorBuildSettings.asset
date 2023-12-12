@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/GameStart.unity
+    guid: de7779bd82b5b0a4599dc642f1ecbee2
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 90893ce108213b3419f12654e93f3a87
@@ -20,4 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BossFight.unity
     guid: 5fae3a4fe1c8fce4b984f51923439226
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: b4909932278a32248afb4c360e946318
   m_configObjects: {}

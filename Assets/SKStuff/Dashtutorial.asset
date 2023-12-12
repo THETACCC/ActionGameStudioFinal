@@ -167,7 +167,8 @@ MonoBehaviour:
     info:
       content_localID: 0
       speaker_localID: 0
-      content: To use the dash, you have to double tap A or D quickly.
+      content: To use the dash, you have to double tap A or D quickly, or you can
+        use SHIFT.
       speaker: Command
       avatar: {fileID: 0}
       audio: {fileID: 0}

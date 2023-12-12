@@ -173,9 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3de36c9f17ecde49abcf1f4b98e7990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationRate: 1000
+  accelerationRate: 1200
   rb: {fileID: 2075004382983051524}
   deadfeedback: {fileID: 4912029822014575150}
+  soundObject: {fileID: 0}
 --- !u!114 &4912029822014575150
 MonoBehaviour:
   m_ObjectHideFlags: 0

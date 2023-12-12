@@ -46,7 +46,7 @@ public class hand_gun : MonoBehaviour
 
     //Sound Ref
     public bool playsound = false;
-
+    public bool noammosound = false;
     void Start()
     {
         ammo = 60;
@@ -55,10 +55,14 @@ public class hand_gun : MonoBehaviour
         originalPosition = Pivot.localPosition;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
+    void OnEnable()
+    {
+        playsound = false;
+        noammosound = false;
+    }
     void Update()
     {
-        Debug.Log(ammo);
+        //Debug.Log(ammo);
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = motion.direction;
@@ -102,9 +106,16 @@ public class hand_gun : MonoBehaviour
                 playsound = false;
             }
         }
+        else if (Input.GetButton("Fire1") && (ammo < 0.99))
+        {
+            noammosound = true;
+        }
+        else if (Input.GetButtonUp("Fire1") && (ammo < 0.99))
+        {
+            noammosound = false;
+        }
 
-
-        if (starteffect)
+            if (starteffect)
         {
             Vector3 newScale = pivot.localScale;
             newScale.x = Mathf.Lerp(newScale.x, 0.6f, Time.deltaTime * effect_speed);

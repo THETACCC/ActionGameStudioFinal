@@ -22,6 +22,15 @@ public class TNT_explosion : MonoBehaviour
      private ParticleSystem explosionbig = default;
      private GameObject smallexplosion;
      private GameObject bigexplosion;
+
+
+    //audio
+    public GameObject Soundobject;
+    private bool soundplayed = false;
+
+    //instantiation
+    private bool instantiated = false;
+
     void Start()
     {
         smallexplosion = GameObject.FindGameObjectWithTag("particles");
@@ -38,6 +47,11 @@ public class TNT_explosion : MonoBehaviour
 
         if (collision.gameObject.tag == "HandgunBullet" || collision.gameObject.tag == "ShotgunBullet" || collision.gameObject.tag == "explosion" || collision.gameObject.tag == "explosion_rocket")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
             Explode();
@@ -45,28 +59,64 @@ public class TNT_explosion : MonoBehaviour
         }
         else if(collision.gameObject.tag == "explosion_alone")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
-            GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+
             StartCoroutine(SelfDestruct());
         }
         else if(collision.gameObject.tag == "Rocket")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                GameObject indicator = Instantiate(explosionRadiusIndicator_super, transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             bigexplosion.transform.position = this.transform.position;
             explosionbig.Play();
 
-            GameObject indicator = Instantiate(explosionRadiusIndicator_super, transform.position, Quaternion.identity);
+
             StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "SeekerEnemy")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
-            GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+
             StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "Boss")
         {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
+            smallexplosion.transform.position = this.transform.position;
+            explosionsmall.Play();
+
+            StartCoroutine(SelfDestruct());
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            if (!soundplayed)
+            {
+                GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                soundplayed = true;
+            }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
             GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
@@ -95,7 +145,7 @@ public class TNT_explosion : MonoBehaviour
 
     private IEnumerator SelfDestruct()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
     IEnumerator FlashAndExplode()
@@ -107,8 +157,12 @@ public class TNT_explosion : MonoBehaviour
             yield return new WaitForSeconds(flashInterval);
             elapsed += flashInterval;
         }
-
+        if (!soundplayed)
+        {
+            GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+            soundplayed = true;
+        }
         GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        StartCoroutine(SelfDestruct());
     }
 }
