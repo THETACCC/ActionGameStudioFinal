@@ -6,8 +6,11 @@ public class NextLevel : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        SceneController.instance.NextLevel();
+        if(collision.gameObject.tag == "Player")
+        {
+            SceneController.instance.NextLevel();
+
+        }
 
     }
 }

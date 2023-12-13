@@ -54,58 +54,63 @@ public class targetDummy : MonoBehaviour
 
         if (collision.gameObject.tag == "HandgunBullet")
         {
-            audioSource.PlayOneShot(beinghit);
-            explosion_handgun.transform.position = collision.transform.position + new Vector3 (1,0,0);
+            bool isCriticalHit = false;
+            DamagePopup.Create(collision.transform.position, 25, isCriticalHit);
+            explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
             explosion_handgun.Play();
-            points += 25;
+
+            Destroy(collision.gameObject);
+
+
         }
         else if (collision.gameObject.tag == "ShotgunBullet")
         {
-            audioSource.PlayOneShot(beinghit);
-            explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
-            explosion_handgun.Play();
-            points += 200;
-        }
-        else if (collision.gameObject.tag == "explosion")
-        {
-            bool isCriticalHit = false;
-            DamagePopup.Create(collision.transform.position, 350, isCriticalHit);
-            audioSource.PlayOneShot(explode);
-            points += 350;
-        }
-        else if (collision.gameObject.tag == "explosion_alone")
-        {
             bool isCriticalHit = false;
             DamagePopup.Create(collision.transform.position, 50, isCriticalHit);
-            audioSource.PlayOneShot(explode);
-            points += 50;
+            explosion_handgun.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+            explosion_handgun.Play();
+  
+            Destroy(collision.gameObject);
+
+
         }
-        else if (collision.gameObject.tag == "explosion_rocket")
+        else if (collision.gameObject.tag == "explosion" )
         {
             bool isCriticalHit = false;
             DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
-            audioSource.PlayOneShot(explode);
+
+            Destroy(collision.gameObject);
+
+
+
+
+        }
+        else if (collision.gameObject.tag == "explosion_alone" )
+        {
+            bool isCriticalHit = false;
+            DamagePopup.Create(collision.transform.position, 100, isCriticalHit);
+
+            Destroy(collision.gameObject);
+
+        }
+        else if (collision.gameObject.tag == "explosion_rocket" )
+        {
+            bool isCriticalHit = false;
+            DamagePopup.Create(collision.transform.position, 150, isCriticalHit);
+
             explosionsmall.transform.position = collision.transform.position + new Vector3(1, 0, 0);
             explosionsmall.Play();
-            points += 100;
+            Destroy(collision.gameObject);
+
+
         }
-        else if (collision.gameObject.tag == "explosion_super")
+        else if (collision.gameObject.tag == "explosion_super" )
         {
             bool isCriticalHit = true;
-            DamagePopup.Create(collision.transform.position + new Vector3(4, 0, 0), 1000, isCriticalHit);
-            audioSource.PlayOneShot(explode);
-            points += 1000;
-        }
-        if (collision.gameObject.tag == "Drone")
-        {
-            audioSource.PlayOneShot(beinghit);
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            float damage = rb.velocity.magnitude * velocityDamageMultiplier;
-
-            points += Mathf.RoundToInt(damage);
-            bool isCriticalHit = false;
-            DamagePopup.Create(collision.transform.position, Mathf.RoundToInt(damage) + 100, isCriticalHit);
-
+            DamagePopup.Create(collision.transform.position + new Vector3(4, 0, 0), 500, isCriticalHit);
+            explosionsmall.transform.position = collision.transform.position + new Vector3(1, 0, 0);
+            explosionsmall.Play();
+            Destroy(collision.gameObject);
         }
         colorIndex = 1;
         colorchange = true;

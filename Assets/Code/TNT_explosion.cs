@@ -50,9 +50,10 @@ public class TNT_explosion : MonoBehaviour
             if (!soundplayed)
             {
                 GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
+                smallexplosion.transform.position = this.transform.position;
                 soundplayed = true;
             }
-            smallexplosion.transform.position = this.transform.position;
+
             explosionsmall.Play();
             Explode();
             StartCoroutine(SelfDestruct());
@@ -63,12 +64,13 @@ public class TNT_explosion : MonoBehaviour
             {
                 GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
                 GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
+                StartCoroutine(SelfDestruct());
                 soundplayed = true;
             }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
 
-            StartCoroutine(SelfDestruct());
+
         }
         else if(collision.gameObject.tag == "Rocket")
         {
@@ -77,12 +79,13 @@ public class TNT_explosion : MonoBehaviour
                 GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
                 GameObject indicator = Instantiate(explosionRadiusIndicator_super, transform.position, Quaternion.identity);
                 soundplayed = true;
+                StartCoroutine(SelfDestruct());
             }
             bigexplosion.transform.position = this.transform.position;
             explosionbig.Play();
 
 
-            StartCoroutine(SelfDestruct());
+
         }
         else if (collision.gameObject.tag == "SeekerEnemy")
         {
@@ -91,11 +94,12 @@ public class TNT_explosion : MonoBehaviour
                 GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
                 GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
                 soundplayed = true;
+                StartCoroutine(SelfDestruct());
             }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
 
-            StartCoroutine(SelfDestruct());
+
         }
         else if (collision.gameObject.tag == "Boss")
         {
@@ -104,23 +108,26 @@ public class TNT_explosion : MonoBehaviour
                 GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
                 GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
                 soundplayed = true;
+
+                StartCoroutine(SelfDestruct());
             }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
 
-            StartCoroutine(SelfDestruct());
         }
         else if (collision.gameObject.tag == "Enemy")
         {
             if (!soundplayed)
             {
+                GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
                 GameObject.Instantiate(Soundobject, this.transform.position, Quaternion.identity);
                 soundplayed = true;
+
+                StartCoroutine(SelfDestruct());
             }
             smallexplosion.transform.position = this.transform.position;
             explosionsmall.Play();
-            GameObject indicator = Instantiate(explosionRadiusIndicator_alone, transform.position, Quaternion.identity);
-            StartCoroutine(SelfDestruct());
+
         }
     }
 

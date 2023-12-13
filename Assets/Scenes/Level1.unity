@@ -458,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 8693619232465796433, guid: 52624dcf580a6ee479cb41ab75df3a52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29940,12 +29944,16 @@ PrefabInstance:
       value: 152.78842
       objectReference: {fileID: 0}
     - target: {fileID: 3573015951024407554, guid: 52624dcf580a6ee479cb41ab75df3a52, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2072.9673
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573015951024407554, guid: 52624dcf580a6ee479cb41ab75df3a52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2174.7424
       objectReference: {fileID: 0}
     - target: {fileID: 3573015951024407554, guid: 52624dcf580a6ee479cb41ab75df3a52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1009
+      value: 15.7236
       objectReference: {fileID: 0}
     - target: {fileID: 3573015951024407554, guid: 52624dcf580a6ee479cb41ab75df3a52, type: 3}
       propertyPath: m_LocalPosition.z
@@ -87826,6 +87834,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 57724668371652762, guid: bf45843602b5d644da9166f51b4fc68f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 57724668371652762, guid: bf45843602b5d644da9166f51b4fc68f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2892893334208976032, guid: bf45843602b5d644da9166f51b4fc68f, type: 3}
       propertyPath: m_Follow
       value: 
@@ -87836,7 +87852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5244952643838125088, guid: bf45843602b5d644da9166f51b4fc68f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2302
+      value: -2282
       objectReference: {fileID: 0}
     - target: {fileID: 5244952643838125088, guid: bf45843602b5d644da9166f51b4fc68f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -97965,7 +97981,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2897046388581304476, guid: 7f53b2b2bd3df1e4a8770f88b4ea9285, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2302
+      value: -2282
       objectReference: {fileID: 0}
     - target: {fileID: 2897046388581304476, guid: 7f53b2b2bd3df1e4a8770f88b4ea9285, type: 3}
       propertyPath: m_LocalPosition.y
