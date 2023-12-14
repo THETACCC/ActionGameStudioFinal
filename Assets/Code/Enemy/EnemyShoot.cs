@@ -114,6 +114,9 @@ public class EnemyShoot : MonoBehaviour
     public bool startLaser = false;
     public bool deathPlayed = false;
 
+    //sounds
+    public AudioSource audiosource;
+    public AudioClip shoot;
     private enum State
     {
         Idle,
@@ -593,6 +596,7 @@ public class EnemyShoot : MonoBehaviour
 
     void NormalShoot()
     {
+        audiosource.PlayOneShot(shoot);
         GameObject bullet_obj = Instantiate(bullet,bulletpos.position, Quaternion.identity);
         Vector3 direction = player.transform.position - transform.position;
         Rigidbody2D rb = bullet_obj.GetComponent<Rigidbody2D>();
@@ -601,6 +605,7 @@ public class EnemyShoot : MonoBehaviour
     }
     void HeavyShoot()
     {
+        audiosource.PlayOneShot(shoot);
         for (int i = 0;i < 4; i++)
         {
             GameObject bullet_obj = Instantiate(bullet, bulletpos.position, Quaternion.identity);
@@ -623,7 +628,7 @@ public class EnemyShoot : MonoBehaviour
             spamtimer += Time.deltaTime;
             if (spamtimer > 0.15)
             {
-
+                audiosource.PlayOneShot(shoot);
                 spamtimer = 0;
                 GameObject bullet_obj = Instantiate(bullet, bulletpos.position, Quaternion.identity);
                 Vector3 direction = player.transform.position - transform.position;
@@ -650,7 +655,7 @@ public class EnemyShoot : MonoBehaviour
             {
                 for (int i = 0; i < 24; i++)
                 {
-
+                    audiosource.PlayOneShot(shoot);
                     GameObject bullet_obj = Instantiate(bullet, bulletpos.position, Quaternion.identity);
                     Vector3 direction = player.transform.position - transform.position;
                     // Calculate the rotation angle for this bullet
@@ -692,6 +697,7 @@ public class EnemyShoot : MonoBehaviour
             spamtimer += Time.deltaTime;
             if (spamtimer > 0.05)
             {
+                audiosource.PlayOneShot(shoot);
                 spamtimer = 0;
                 GameObject bullet_obj = Instantiate(bullet, bulletpos.position, Quaternion.identity);
                 Vector3 direction = player.transform.position - transform.position;
