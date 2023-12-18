@@ -11,6 +11,11 @@ public class SentenceTrigger : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            player_controller controll = collision.gameObject.GetComponent<player_controller>();
+            Rigidbody2D playerRB = collision.gameObject.GetComponent<Rigidbody2D>();
+            controll.current_speed_left = 0f;
+            controll.current_speed_right = 0f;
+            playerRB.velocity = new Vector2(0f, playerRB.velocity.y);
             player.Play();
         }
     }

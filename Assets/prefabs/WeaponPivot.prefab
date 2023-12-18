@@ -45361,7 +45361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7087461432296109878, guid: 0da8bf7b8ec983941ad21c982b5fa2d9, type: 3}
   firePoint: {fileID: 3142469836069380400}
-  bulletSpeed: 80
+  bulletSpeed: 160
   bulletLifeTime: 999
   recoilAmount: 0
   recoilSpeed: 0

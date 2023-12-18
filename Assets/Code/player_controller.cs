@@ -18,8 +18,8 @@ public class player_controller : MonoBehaviour
     private float max_hspeed_dash =150f;
     public float speed = 2f;
     public float jump_power = 16f;
-    private float current_speed_right = 0f;
-    private float current_speed_left = 0f;
+    public float current_speed_right = 0f;
+    public float current_speed_left = 0f;
     public float wall_jumping_power = 10f;
     public float air_speed = 10f;
 

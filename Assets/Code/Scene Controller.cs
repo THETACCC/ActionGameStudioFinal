@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
     [SerializeField] Animator transitionAnim;
 
-
+    private int levelIndex;
     private void Awake()
     {
         if(instance == null)
@@ -33,7 +33,21 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            levelIndex = 0;
+            LoadSpecific();
+        }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            levelIndex = 1;
+            LoadSpecific();
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            levelIndex = 2;
+            LoadSpecific();
+        }
     }
 
     public void NextLevel()
@@ -48,6 +62,11 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LevelRestart());
     }
 
+    public void LoadSpecific()
+    {
+        StartCoroutine(LoadLevelSpecific());
+    }
+
 
     IEnumerator LoadLevel()
     {
@@ -57,6 +76,16 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         transitionAnim.SetTrigger("Start");
     }
+
+    IEnumerator LoadLevelSpecific()
+    {
+        transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(0.9f);
+        SceneManager.LoadSceneAsync(levelIndex);
+        yield return new WaitForSeconds(0.5f);
+        transitionAnim.SetTrigger("Start");
+    }
+
 
     IEnumerator LevelRestart()
     {
